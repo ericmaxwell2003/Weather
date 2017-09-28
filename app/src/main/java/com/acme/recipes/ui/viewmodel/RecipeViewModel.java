@@ -3,6 +3,7 @@ package com.acme.recipes.ui.viewmodel;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
+import com.acme.recipes.data.dao.RecipeDao;
 import com.acme.recipes.data.entity.RecipeEntity;
 
 import io.realm.Realm;
@@ -11,11 +12,14 @@ import io.realm.RealmObject;
 public class RecipeViewModel extends ViewModel {
 
     private final Realm database;
+    private final RecipeDao dao;
+
     private RecipeEntity recipe;
 
     public RecipeViewModel(String recipeId) {
         database = Realm.getDefaultInstance();
-        recipe = database.where(RecipeEntity.class).equalTo("id", recipeId).findFirst();
+        dao = new RecipeDao(database);
+        recipe = dao.findById(recipeId);
     }
 
     public RecipeEntity getRecipe() {

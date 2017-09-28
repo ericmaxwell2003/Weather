@@ -1,5 +1,6 @@
 package com.acme.recipes.data.util;
 
+import com.acme.recipes.data.dao.RecipeDao;
 import com.acme.recipes.data.entity.IngredientEntity;
 import com.acme.recipes.data.entity.RecipeEntity;
 
@@ -13,11 +14,13 @@ import io.realm.Realm;
 public class DatabaseInitTransaction implements Realm.Transaction {
 
     @Override
-    public void execute(@Nonnull Realm realm) {
+    public void execute(@Nonnull Realm db) {
 
-        realm.deleteAll();
+        RecipeDao recipeDao = new RecipeDao(db);
 
-        RecipeEntity eclair = realm.copyToRealmOrUpdate(
+        db.deleteAll();
+
+        RecipeEntity eclair = recipeDao.copyOrUpdate(
             new RecipeEntity(UUID.randomUUID().toString(),
                     "Eclair",
                     "Pastry filled with cream",
@@ -32,7 +35,7 @@ public class DatabaseInitTransaction implements Realm.Transaction {
             )
         );
 
-        RecipeEntity oreo = realm.copyToRealmOrUpdate(
+        RecipeEntity oreo = recipeDao.copyOrUpdate(
             new RecipeEntity(UUID.randomUUID().toString(),
                     "Oreo",
                     "Chocolate cookie",
