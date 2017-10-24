@@ -1,1 +1,1 @@
-include ':dao-lesson'
+include ':dao-lesson', ':livedata-lesson'
