@@ -12,5 +12,5 @@ Realm Arch Compoenents Recipes App is laid out in a series of modules, each runn
 For example, the DAO lesson module, has the basics of using Realm with DAOs and nothing else.  The next module, live-data-lesson contains everything from the dao-lesson plus it introduces the LiveData concept.
 
 ### Modules
-dao-lesson - Shows an example of how to use DAOs with Realm.
-livedata-lesson - Shows how to expose RealmResults as LiveData.
+* *dao-lesson* - Shows an example of how to use DAOs with Realm.
+* *livedata-lesson* - Shows how to expose RealmResults as LiveData.
