@@ -47,7 +47,6 @@ public class RecipeListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         recipeListViewModel = ViewModelProviders.of(this).get(RecipeListViewModel.class);
 
-        //recipeAdapter.setRecipeList(recipeListViewModel.getRecipes());
         recipeListViewModel.getRecipes().observe(this, new Observer<RealmResults<RecipeEntity>>() {
             @Override
             public void onChanged(@Nullable RealmResults<RecipeEntity> recipeEntities) {
@@ -57,7 +56,6 @@ public class RecipeListFragment extends Fragment {
 
         initializeStreamButton();
     }
-
 
     private void initializeStreamButton() {
         FloatingActionButton streamButton = getActivity().findViewById(R.id.fabStreamRecipes);
