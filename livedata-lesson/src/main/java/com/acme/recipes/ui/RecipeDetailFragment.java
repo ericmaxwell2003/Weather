@@ -1,5 +1,6 @@
 package com.acme.recipes.ui;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.acme.recipes.R;
+import com.acme.recipes.data.entity.RecipeEntity;
 import com.acme.recipes.databinding.RecipeDetailFragmentBinding;
 import com.acme.recipes.ui.viewmodel.RecipeViewModel;
 
@@ -45,8 +47,16 @@ public class RecipeDetailFragment extends Fragment {
                 .of(this, factory)
                 .get(RecipeViewModel.class);
 
-        binding.setRecipe(viewModel.getRecipe());
-        ingredientListAdapter.setIngredients(viewModel.getRecipe().getIngredients());
+        viewModel.getRecipe().observe(this, new Observer<RecipeEntity>() {
+            @Override
+            public void onChanged(@Nullable RecipeEntity recipeEntity) {
+                binding.setRecipe(recipeEntity);
+                if(recipeEntity != null) {
+                    ingredientListAdapter.setIngredients(recipeEntity.getIngredients());
+                }
+            }
+        });
+
     }
 
     public static RecipeDetailFragment forRecipe(String recipeId) {

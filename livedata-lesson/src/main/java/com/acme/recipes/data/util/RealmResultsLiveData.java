@@ -37,4 +37,5 @@ public class RealmResultsLiveData<T extends RealmModel> extends LiveData<RealmRe
         super.onInactive();
         results.removeChangeListener(listener);
     }
+
 }

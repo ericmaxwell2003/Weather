@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 
 import com.acme.recipes.data.entity.RecipeEntity;
 import com.acme.recipes.data.entity.RecipeEntityFields;
+import com.acme.recipes.data.util.RealmLiveData;
 import com.acme.recipes.data.util.RealmResultsLiveData;
 
 import javax.annotation.Nonnull;
@@ -22,10 +23,11 @@ public class RecipeDao extends Dao<RecipeEntity> {
         return new RealmResultsLiveData<>(where().findAllAsync());
     }
 
-    public RecipeEntity findById(final String id) {
-        return where()
+    public LiveData<RecipeEntity> findByIdAsync(final String id) {
+        return new RealmLiveData<>(
+                where()
                 .equalTo(RecipeEntityFields.ID, id)
-                .findFirst();
+                .findFirstAsync());
     }
 
     private RealmQuery<RecipeEntity> where() {
