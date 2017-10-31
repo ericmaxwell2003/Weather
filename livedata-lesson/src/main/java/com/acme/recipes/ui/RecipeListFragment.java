@@ -1,17 +1,16 @@
 package com.acme.recipes.ui;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.acme.recipes.R;
 import com.acme.recipes.data.entity.RecipeEntity;
@@ -24,10 +23,9 @@ import io.realm.RealmResults;
 
 public class RecipeListFragment extends Fragment {
 
-    private FloatingActionButton streamButton;
-
     private RecipeAdapter recipeAdapter;
     private RecipeListViewModel recipeListViewModel;
+    private static final String TAG = "RecipeListFragment";
 
     @Nullable
     @Override
@@ -48,9 +46,21 @@ public class RecipeListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         recipeListViewModel = ViewModelProviders.of(this).get(RecipeListViewModel.class);
-        recipeAdapter.setRecipeList(recipeListViewModel.getRecipes());
 
-        streamButton = getActivity().findViewById(R.id.fabStreamRecipes);
+        //recipeAdapter.setRecipeList(recipeListViewModel.getRecipes());
+        recipeListViewModel.getRecipes().observe(this, new Observer<RealmResults<RecipeEntity>>() {
+            @Override
+            public void onChanged(@Nullable RealmResults<RecipeEntity> recipeEntities) {
+                recipeAdapter.setRecipeList(recipeEntities);
+            }
+        });
+
+        initializeStreamButton();
+    }
+
+
+    private void initializeStreamButton() {
+        FloatingActionButton streamButton = getActivity().findViewById(R.id.fabStreamRecipes);
         streamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,29 +81,7 @@ public class RecipeListFragment extends Fragment {
                 return true;
             }
         });
-
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        recipeListViewModel.getRecipes().addChangeListener(recipeEntityRealmChangeListener);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        recipeListViewModel.getRecipes().removeChangeListener(recipeEntityRealmChangeListener);
-    }
-
-    // Update Recipes when they change.
-    private RealmChangeListener<RealmResults<RecipeEntity>> recipeEntityRealmChangeListener =
-            new RealmChangeListener<RealmResults<RecipeEntity>>() {
-                @Override
-                public void onChange(@Nonnull RealmResults<RecipeEntity> updatedRecipes) {
-                    recipeAdapter.setRecipeList(updatedRecipes);
-                }
-            };
 
     private ItemClickListener<RecipeEntity> recipeClickListener =
             new ItemClickListener<RecipeEntity>() {

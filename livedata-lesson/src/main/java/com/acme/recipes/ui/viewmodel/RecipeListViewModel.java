@@ -1,7 +1,6 @@
 package com.acme.recipes.ui.viewmodel;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.acme.recipes.data.RecipeStreamingService;
@@ -17,7 +16,7 @@ public class RecipeListViewModel extends ViewModel {
     private RecipeDao dao;
     private RecipeStreamingService recipeStreamingService;
 
-    private RealmResults<RecipeEntity> recipes;
+    private LiveData<RealmResults<RecipeEntity>> recipes;
 
     public RecipeListViewModel() {
         database = Realm.getDefaultInstance();
@@ -40,12 +39,10 @@ public class RecipeListViewModel extends ViewModel {
 
     @Override
     protected void onCleared() {
-        recipeStreamingService.stopStreamingRecipes();
-        recipes.removeAllChangeListeners();
         database.close();
     }
 
-    public RealmResults<RecipeEntity> getRecipes() {
+    public LiveData<RealmResults<RecipeEntity>> getRecipes() {
         return recipes;
     }
 
