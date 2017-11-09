@@ -13,4 +13,4 @@ For example, the DAO lesson module, has the basics of using Realm with DAOs and 
 
 ### Modules
 * *dao-lesson* - Shows an example of how to use DAOs with Realm.
-* *livedata-lesson* - Shows how to expose RealmResults as LiveData.
+* *livedata-lesson* - Shows how to expose RealmResults as LiveData and uses LiveData Transformations to provide observers with data that is Persistence Layer & Domain Model agnostic and Read only (live but not mutable by the observer).
