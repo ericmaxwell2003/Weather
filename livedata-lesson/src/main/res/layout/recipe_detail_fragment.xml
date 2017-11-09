@@ -5,7 +5,7 @@
 
     <data>
         <import type="android.view.View"/>
-        <variable name="recipe" type="com.acme.recipes.data.entity.RecipeEntity"/>
+        <variable name="recipe" type="com.acme.recipes.database.entity.RecipeEntity"/>
     </data>
 
     <LinearLayout

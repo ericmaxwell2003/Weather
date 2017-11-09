@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.acme.recipes.R;
-import com.acme.recipes.data.entity.RecipeEntity;
+import com.acme.recipes.database.entity.RecipeEntity;
 import com.acme.recipes.databinding.RecipeDetailFragmentBinding;
-import com.acme.recipes.ui.viewmodel.RecipeViewModel;
+import com.acme.recipes.viewmodel.RecipeViewModel;
 
 public class RecipeDetailFragment extends Fragment {
 

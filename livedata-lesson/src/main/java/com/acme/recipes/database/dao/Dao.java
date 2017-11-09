@@ -1,4 +1,4 @@
-package com.acme.recipes.data.dao;
+package com.acme.recipes.database.dao;
 
 import io.realm.Realm;
 import io.realm.RealmModel;

@@ -1,11 +1,11 @@
-package com.acme.recipes.data.dao;
+package com.acme.recipes.database.dao;
 
 import android.arch.lifecycle.LiveData;
 
-import com.acme.recipes.data.entity.RecipeEntity;
-import com.acme.recipes.data.entity.RecipeEntityFields;
-import com.acme.recipes.data.util.RealmLiveData;
-import com.acme.recipes.data.util.RealmResultsLiveData;
+import com.acme.recipes.database.entity.RecipeEntity;
+import com.acme.recipes.database.entity.RecipeEntityFields;
+import com.acme.recipes.database.util.RealmLiveData;
+import com.acme.recipes.database.util.RealmResultsLiveData;
 
 import javax.annotation.Nonnull;
 

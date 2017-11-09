@@ -1,8 +1,8 @@
-package com.acme.recipes.data.util;
+package com.acme.recipes.database.util;
 
-import com.acme.recipes.data.dao.RecipeDao;
-import com.acme.recipes.data.entity.IngredientEntity;
-import com.acme.recipes.data.entity.RecipeEntity;
+import com.acme.recipes.database.dao.RecipeDao;
+import com.acme.recipes.database.entity.IngredientEntity;
+import com.acme.recipes.database.entity.RecipeEntity;
 
 import java.util.Arrays;
 import java.util.UUID;

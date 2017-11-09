@@ -1,10 +1,10 @@
-package com.acme.recipes.data;
+package com.acme.recipes.service;
 
 import android.support.annotation.WorkerThread;
 
-import com.acme.recipes.data.dao.RecipeDao;
-import com.acme.recipes.data.entity.IngredientEntity;
-import com.acme.recipes.data.entity.RecipeEntity;
+import com.acme.recipes.database.dao.RecipeDao;
+import com.acme.recipes.database.entity.IngredientEntity;
+import com.acme.recipes.database.entity.RecipeEntity;
 
 import java.util.Random;
 import java.util.Timer;

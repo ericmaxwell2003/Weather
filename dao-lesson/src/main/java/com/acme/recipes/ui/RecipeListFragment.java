@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.acme.recipes.R;
-import com.acme.recipes.data.entity.RecipeEntity;
-import com.acme.recipes.ui.viewmodel.RecipeListViewModel;
+import com.acme.recipes.database.entity.RecipeEntity;
+import com.acme.recipes.viewmodel.RecipeListViewModel;
 
 import javax.annotation.Nonnull;
 

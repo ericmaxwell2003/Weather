@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.acme.recipes.R;
-import com.acme.recipes.data.entity.RecipeEntity;
+import com.acme.recipes.database.entity.RecipeEntity;
 
 public class MainActivity extends AppCompatActivity {
 

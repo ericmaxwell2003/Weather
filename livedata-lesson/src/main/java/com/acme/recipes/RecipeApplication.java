@@ -2,7 +2,7 @@ package com.acme.recipes;
 
 import android.app.Application;
 
-import com.acme.recipes.data.util.DatabaseInitTransaction;
+import com.acme.recipes.database.util.DatabaseInitTransaction;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;

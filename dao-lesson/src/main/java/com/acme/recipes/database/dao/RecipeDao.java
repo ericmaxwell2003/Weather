@@ -1,7 +1,7 @@
-package com.acme.recipes.data.dao;
+package com.acme.recipes.database.dao;
 
-import com.acme.recipes.data.entity.RecipeEntity;
-import com.acme.recipes.data.entity.RecipeEntityFields;
+import com.acme.recipes.database.entity.RecipeEntity;
+import com.acme.recipes.database.entity.RecipeEntityFields;
 
 import io.realm.Case;
 import io.realm.Realm;

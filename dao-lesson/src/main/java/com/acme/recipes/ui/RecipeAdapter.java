@@ -1,13 +1,12 @@
 package com.acme.recipes.ui;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.acme.recipes.R;
-import com.acme.recipes.data.entity.RecipeEntity;
+import com.acme.recipes.database.entity.RecipeEntity;
 import com.acme.recipes.databinding.RecipeItemBinding;
 
 import java.util.List;

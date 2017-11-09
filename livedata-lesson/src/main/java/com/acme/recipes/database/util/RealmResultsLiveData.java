@@ -1,4 +1,4 @@
-package com.acme.recipes.data.util;
+package com.acme.recipes.database.util;
 
 import android.arch.lifecycle.LiveData;
 

@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.acme.recipes.R;
-import com.acme.recipes.data.entity.IngredientEntity;
+import com.acme.recipes.database.entity.IngredientEntity;
 import com.acme.recipes.databinding.IngredientItemBinding;
 
 import java.util.List;

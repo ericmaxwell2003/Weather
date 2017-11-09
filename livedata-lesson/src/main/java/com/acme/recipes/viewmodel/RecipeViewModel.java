@@ -1,34 +1,33 @@
-package com.acme.recipes.ui.viewmodel;
+package com.acme.recipes.viewmodel;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.acme.recipes.data.dao.RecipeDao;
-import com.acme.recipes.data.entity.RecipeEntity;
+import com.acme.recipes.database.dao.RecipeDao;
+import com.acme.recipes.database.entity.RecipeEntity;
 
 import io.realm.Realm;
-import io.realm.RealmObject;
 
 public class RecipeViewModel extends ViewModel {
 
     private final Realm database;
     private final RecipeDao dao;
 
-    private RecipeEntity recipe;
+    private LiveData<RecipeEntity> recipe;
 
     public RecipeViewModel(String recipeId) {
         database = Realm.getDefaultInstance();
         dao = new RecipeDao(database);
-        recipe = dao.findById(recipeId);
+        recipe = dao.findByIdAsync(recipeId);
     }
 
-    public RecipeEntity getRecipe() {
+    public LiveData<RecipeEntity> getRecipe() {
         return recipe;
     }
 
     @Override
     protected void onCleared() {
-        RealmObject.removeAllChangeListeners(recipe);
         database.close();
     }
 

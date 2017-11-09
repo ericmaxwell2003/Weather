@@ -1,9 +1,9 @@
-package com.acme.recipes.ui.viewmodel;
+package com.acme.recipes.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 
-import com.acme.recipes.data.dao.RecipeDao;
-import com.acme.recipes.data.entity.RecipeEntity;
+import com.acme.recipes.database.dao.RecipeDao;
+import com.acme.recipes.database.entity.RecipeEntity;
 
 import io.realm.Realm;
 import io.realm.RealmResults;

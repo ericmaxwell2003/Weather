@@ -7,24 +7,22 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.acme.recipes.R;
-import com.acme.recipes.data.entity.RecipeEntity;
-import com.acme.recipes.ui.viewmodel.RecipeListViewModel;
+import com.acme.recipes.database.entity.RecipeEntity;
+import com.acme.recipes.viewmodel.RecipeListViewModel;
 
-import javax.annotation.Nonnull;
-
-import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
 public class RecipeListFragment extends Fragment {
 
     private RecipeAdapter recipeAdapter;
     private RecipeListViewModel recipeListViewModel;
+    private TextView recipeTotalCountLabel;
     private static final String TAG = "RecipeListFragment";
 
     @Nullable
@@ -39,6 +37,8 @@ public class RecipeListFragment extends Fragment {
         RecyclerView recyclerView = root.findViewById(R.id.recipes_list_recycler_view);
         recyclerView.setAdapter(recipeAdapter);
 
+        recipeTotalCountLabel = root.findViewById(R.id.totalCountLabel);
+
         return root;
     }
 
@@ -51,6 +51,15 @@ public class RecipeListFragment extends Fragment {
             @Override
             public void onChanged(@Nullable RealmResults<RecipeEntity> recipeEntities) {
                 recipeAdapter.setRecipeList(recipeEntities);
+            }
+        });
+
+        recipeListViewModel.getRecipeCount().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer updatedCount) {
+                recipeTotalCountLabel.setText(
+                        getContext().getString(R.string.recipe_count_msg,
+                        String.valueOf(updatedCount)));
             }
         });
 

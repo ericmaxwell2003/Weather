@@ -1,4 +1,4 @@
-package com.acme.recipes.data.entity;
+package com.acme.recipes.database.entity;
 
 import io.realm.RealmList;
 import io.realm.RealmModel;
