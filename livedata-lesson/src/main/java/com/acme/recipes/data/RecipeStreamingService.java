@@ -58,7 +58,7 @@ public class RecipeStreamingService {
 
         String id = UUID.randomUUID().toString();
         String dessertName = deserts[random.nextInt(deserts.length - 1)];
-        String dessertDesc = dessertName + " " + adjectives[random.nextInt(adjectives.length - 1)];
+        String dessertDesc = adjectives[random.nextInt(adjectives.length - 1)] + " " + dessertName;
         int calorieCount = random.nextInt(1000);
 
         RecipeEntity recipeEntity = recipeDao.copyOrUpdate(
