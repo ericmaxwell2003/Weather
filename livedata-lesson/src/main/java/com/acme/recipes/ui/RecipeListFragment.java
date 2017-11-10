@@ -38,7 +38,6 @@ public class RecipeListFragment extends Fragment {
         recyclerView.setAdapter(recipeAdapter);
 
         recipeTotalCountLabel = root.findViewById(R.id.totalCountLabel);
-
         return root;
     }
 
@@ -58,8 +57,7 @@ public class RecipeListFragment extends Fragment {
             @Override
             public void onChanged(@Nullable Integer updatedCount) {
                 recipeTotalCountLabel.setText(
-                        getContext().getString(R.string.recipe_count_msg,
-                        String.valueOf(updatedCount)));
+                        getString(R.string.recipe_count_msg, String.valueOf(updatedCount)));
             }
         });
 

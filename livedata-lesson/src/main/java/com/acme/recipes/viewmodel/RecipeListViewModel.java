@@ -5,9 +5,9 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 
-import com.acme.recipes.service.RecipeStreamingService;
 import com.acme.recipes.database.dao.RecipeDao;
 import com.acme.recipes.database.entity.RecipeEntity;
+import com.acme.recipes.service.RecipeStreamingService;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -26,12 +26,14 @@ public class RecipeListViewModel extends ViewModel {
         recipeStreamingService = new RecipeStreamingService();
         dao = new RecipeDao(database);
         recipes = dao.findAllAsync();
+
         recipeCount = Transformations.map(recipes, new Function<RealmResults<RecipeEntity>, Integer>() {
             @Override
             public Integer apply(RealmResults<RecipeEntity> input) {
                 return input.size();
             }
         });
+
     }
 
     public void startStreaming() {
@@ -51,12 +53,11 @@ public class RecipeListViewModel extends ViewModel {
         database.close();
     }
 
-    public LiveData<Integer> getRecipeCount() {
-        return recipeCount;
-    }
-
     public LiveData<RealmResults<RecipeEntity>> getRecipes() {
         return recipes;
     }
 
+    public LiveData<Integer> getRecipeCount() {
+        return recipeCount;
+    }
 }
