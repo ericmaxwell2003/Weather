@@ -13,7 +13,6 @@ import com.acme.recipes.service.RecipeStreamingService;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 public class RecipeListViewModel extends ViewModel {
 

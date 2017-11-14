@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.acme.recipes.R;
-import com.acme.recipes.database.entity.RecipeEntity;
 import com.acme.recipes.databinding.RecipeDetailFragmentBinding;
+import com.acme.recipes.model.Recipe;
 import com.acme.recipes.viewmodel.RecipeViewModel;
 
 public class RecipeDetailFragment extends Fragment {
@@ -47,12 +47,12 @@ public class RecipeDetailFragment extends Fragment {
                 .of(this, factory)
                 .get(RecipeViewModel.class);
 
-        viewModel.getRecipe().observe(this, new Observer<RecipeEntity>() {
+        viewModel.getRecipe().observe(this, new Observer<Recipe>() {
             @Override
-            public void onChanged(@Nullable RecipeEntity recipeEntity) {
-                binding.setRecipe(recipeEntity);
-                if(recipeEntity != null) {
-                    ingredientListAdapter.setIngredients(recipeEntity.getIngredients());
+            public void onChanged(@Nullable Recipe recipe) {
+                binding.setRecipe(recipe);
+                if(recipe != null) {
+                    ingredientListAdapter.setIngredients(recipe.getIngredients());
                 }
             }
         });

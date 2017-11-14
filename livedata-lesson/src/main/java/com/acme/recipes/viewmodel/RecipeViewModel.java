@@ -1,11 +1,14 @@
 package com.acme.recipes.viewmodel;
 
+import android.arch.core.util.Function;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
 import com.acme.recipes.database.dao.RecipeDao;
 import com.acme.recipes.database.entity.RecipeEntity;
+import com.acme.recipes.model.Recipe;
 
 import io.realm.Realm;
 
@@ -14,15 +17,21 @@ public class RecipeViewModel extends ViewModel {
     private final Realm database;
     private final RecipeDao dao;
 
-    private LiveData<RecipeEntity> recipe;
+    private LiveData<Recipe> recipe;
 
     public RecipeViewModel(String recipeId) {
         database = Realm.getDefaultInstance();
         dao = new RecipeDao(database);
-        recipe = dao.findByIdAsync(recipeId);
+        recipe = Transformations.map(dao.findByIdAsync(recipeId),
+                new Function<RecipeEntity, Recipe>() {
+            @Override
+            public Recipe apply(RecipeEntity input) {
+                return input;
+            }
+        });
     }
 
-    public LiveData<RecipeEntity> getRecipe() {
+    public LiveData<Recipe> getRecipe() {
         return recipe;
     }
 

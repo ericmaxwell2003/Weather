@@ -6,16 +6,16 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.acme.recipes.R;
-import com.acme.recipes.database.entity.IngredientEntity;
 import com.acme.recipes.databinding.IngredientItemBinding;
+import com.acme.recipes.model.Ingredient;
 
 import java.util.List;
 
 public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.IngredientViewHolder> {
 
-    private List<IngredientEntity> ingredients;
+    private List<? extends Ingredient> ingredients;
 
-    public void setIngredients(List<IngredientEntity> ingredients) {
+    public void setIngredients(List<? extends Ingredient> ingredients) {
         this.ingredients = ingredients;
         notifyDataSetChanged();
     }

@@ -19,8 +19,6 @@ import com.acme.recipes.viewmodel.RecipeListViewModel;
 
 import java.util.List;
 
-import io.realm.RealmResults;
-
 public class RecipeListFragment extends Fragment {
 
     private RecipeAdapter recipeAdapter;
@@ -51,11 +49,6 @@ public class RecipeListFragment extends Fragment {
         recipeListViewModel.getRecipes().observe(this, new Observer<List<? extends Recipe>>() {
             @Override
             public void onChanged(@Nullable List<? extends Recipe> recipes) {
-
-                Recipe r = recipes.get(0);
-
-
-
                 recipeAdapter.setRecipeList(recipes);
             }
         });

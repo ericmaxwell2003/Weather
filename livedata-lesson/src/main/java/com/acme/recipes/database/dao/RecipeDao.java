@@ -13,7 +13,6 @@ import javax.annotation.Nonnull;
 
 import io.realm.Realm;
 import io.realm.RealmQuery;
-import io.realm.RealmResults;
 
 public class RecipeDao extends Dao<RecipeEntity> {
 

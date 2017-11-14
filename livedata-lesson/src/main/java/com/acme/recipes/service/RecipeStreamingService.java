@@ -76,7 +76,7 @@ public class RecipeStreamingService {
     private String[] deserts = { "Baked Alaska",
                                  "Baked Apple",
                                  "Baklava",
-                                 "Banana Aplit",
+                                 "Banana Split",
                                  "Belgian Waffle",
                                  "Biscotti",
                                  "Black Forest Cake",
