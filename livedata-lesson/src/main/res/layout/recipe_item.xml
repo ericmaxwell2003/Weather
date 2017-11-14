@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="recipe" type="com.acme.recipes.database.entity.RecipeEntity" />
+        <variable name="recipe" type="com.acme.recipes.model.Recipe" />
         <variable name="itemClickListener" type="com.acme.recipes.ui.ItemClickListener"/>
     </data>
 

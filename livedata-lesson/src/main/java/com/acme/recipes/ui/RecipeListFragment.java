@@ -14,7 +14,10 @@ import android.widget.TextView;
 
 import com.acme.recipes.R;
 import com.acme.recipes.database.entity.RecipeEntity;
+import com.acme.recipes.model.Recipe;
 import com.acme.recipes.viewmodel.RecipeListViewModel;
+
+import java.util.List;
 
 import io.realm.RealmResults;
 
@@ -23,7 +26,6 @@ public class RecipeListFragment extends Fragment {
     private RecipeAdapter recipeAdapter;
     private RecipeListViewModel recipeListViewModel;
     private TextView recipeTotalCountLabel;
-    private static final String TAG = "RecipeListFragment";
 
     @Nullable
     @Override
@@ -46,10 +48,15 @@ public class RecipeListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         recipeListViewModel = ViewModelProviders.of(this).get(RecipeListViewModel.class);
 
-        recipeListViewModel.getRecipes().observe(this, new Observer<RealmResults<RecipeEntity>>() {
+        recipeListViewModel.getRecipes().observe(this, new Observer<List<? extends Recipe>>() {
             @Override
-            public void onChanged(@Nullable RealmResults<RecipeEntity> recipeEntities) {
-                recipeAdapter.setRecipeList(recipeEntities);
+            public void onChanged(@Nullable List<? extends Recipe> recipes) {
+
+                Recipe r = recipes.get(0);
+
+
+
+                recipeAdapter.setRecipeList(recipes);
             }
         });
 

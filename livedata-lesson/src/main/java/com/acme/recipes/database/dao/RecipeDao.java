@@ -7,6 +7,8 @@ import com.acme.recipes.database.entity.RecipeEntityFields;
 import com.acme.recipes.database.util.RealmLiveData;
 import com.acme.recipes.database.util.RealmResultsLiveData;
 
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import io.realm.Realm;
@@ -19,7 +21,7 @@ public class RecipeDao extends Dao<RecipeEntity> {
         super(db);
     }
 
-    public LiveData<RealmResults<RecipeEntity>> findAllAsync() {
+    public LiveData<List<RecipeEntity>> findAllAsync() {
         return new RealmResultsLiveData<>(where().findAllAsync());
     }
 

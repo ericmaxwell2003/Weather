@@ -7,7 +7,10 @@ import android.arch.lifecycle.ViewModel;
 
 import com.acme.recipes.database.dao.RecipeDao;
 import com.acme.recipes.database.entity.RecipeEntity;
+import com.acme.recipes.model.Recipe;
 import com.acme.recipes.service.RecipeStreamingService;
+
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -18,18 +21,24 @@ public class RecipeListViewModel extends ViewModel {
     private RecipeDao dao;
     private RecipeStreamingService recipeStreamingService;
 
-    private LiveData<RealmResults<RecipeEntity>> recipes;
+    private LiveData<List<? extends Recipe>> recipes;
     private LiveData<Integer> recipeCount;
 
     public RecipeListViewModel() {
         database = Realm.getDefaultInstance();
         recipeStreamingService = new RecipeStreamingService();
         dao = new RecipeDao(database);
-        recipes = dao.findAllAsync();
 
-        recipeCount = Transformations.map(recipes, new Function<RealmResults<RecipeEntity>, Integer>() {
+        recipes = Transformations.map(dao.findAllAsync(), new Function<List<RecipeEntity>, List<? extends Recipe>>() {
             @Override
-            public Integer apply(RealmResults<RecipeEntity> input) {
+            public List<? extends Recipe> apply(List<RecipeEntity> input) {
+                return input;
+            }
+        });
+
+        recipeCount = Transformations.map(recipes, new Function<List<? extends Recipe>, Integer>() {
+            @Override
+            public Integer apply(List<? extends Recipe> input) {
                 return input.size();
             }
         });
@@ -53,7 +62,7 @@ public class RecipeListViewModel extends ViewModel {
         database.close();
     }
 
-    public LiveData<RealmResults<RecipeEntity>> getRecipes() {
+    public LiveData<List<? extends Recipe>> getRecipes() {
         return recipes;
     }
 

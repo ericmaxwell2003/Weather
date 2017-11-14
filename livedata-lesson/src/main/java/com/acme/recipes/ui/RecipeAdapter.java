@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.acme.recipes.R;
-import com.acme.recipes.database.entity.RecipeEntity;
 import com.acme.recipes.databinding.RecipeItemBinding;
+import com.acme.recipes.model.Recipe;
 
 import java.util.List;
 
@@ -15,14 +15,14 @@ import javax.annotation.Nonnull;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
-    private List<RecipeEntity> recipes;
-    private ItemClickListener<RecipeEntity> clickListener;
+    private List<? extends Recipe> recipes;
+    private ItemClickListener<? extends Recipe> clickListener;
 
-    public RecipeAdapter(@Nonnull ItemClickListener<RecipeEntity> clickListener) {
+    public RecipeAdapter(@Nonnull ItemClickListener<? extends Recipe> clickListener) {
         this.clickListener = clickListener;
     }
 
-    public void setRecipeList(final List<RecipeEntity> recipeList) {
+    public void setRecipeList(final List<? extends Recipe> recipeList) {
         recipes = recipeList;
         notifyDataSetChanged();
     }
