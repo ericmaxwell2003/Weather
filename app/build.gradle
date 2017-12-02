@@ -1,13 +1,16 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.1'
     defaultConfig {
         applicationId "com.acme.recipes"
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -26,12 +29,14 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    implementation 'com.android.support:design:26.1.0'
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:cardview-v7:26.1.0'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.android.support:design:27.0.2'
+    compile 'com.android.support:appcompat-v7:27.0.2'
+    compile 'com.android.support:cardview-v7:27.0.2'
+    compile 'com.android.support:recyclerview-v7:27.0.2'
     compile 'android.arch.lifecycle:extensions:1.0.0'
-    annotationProcessor 'android.arch.lifecycle:compiler:1.0.0'
+    kapt 'android.arch.lifecycle:compiler:1.0.0'
+
+    kapt "com.android.databinding:compiler:3.1.0-alpha04"
 
     testCompile 'junit:junit:4.12'
 
@@ -47,11 +52,15 @@ dependencies {
     }
 
     // Force usage of dependencies in the test app, since it is internally used by the runner module.
-    androidTestCompile 'com.android.support:support-annotations:26.1.0'
-    androidTestCompile 'com.android.support:support-v4:26.1.0'
-    androidTestCompile 'com.android.support:recyclerview-v7:26.1.0'
+    androidTestCompile 'com.android.support:support-annotations:27.0.2'
+    androidTestCompile 'com.android.support:support-v4:27.0.2'
+    androidTestCompile 'com.android.support:recyclerview-v7:27.0.2'
 
-    annotationProcessor 'dk.ilios:realmfieldnameshelper:1.1.1'
+    kapt 'dk.ilios:realmfieldnameshelper:1.1.1'
     implementation 'io.realm:android-adapters:2.1.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }
