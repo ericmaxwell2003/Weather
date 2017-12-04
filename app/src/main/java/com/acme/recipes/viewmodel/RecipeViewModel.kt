@@ -5,13 +5,14 @@ import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.acme.recipes.database.dao.RecipeDao
+import com.acme.recipes.database.util.recipeDao
 import com.acme.recipes.model.Recipe
 import io.realm.Realm
 
 class RecipeViewModel(recipeId: String) : ViewModel() {
 
     private val database = Realm.getDefaultInstance()
-    private val dao = RecipeDao(database)
+    private val dao = database.recipeDao()
 
     val recipe: LiveData<Recipe>
 

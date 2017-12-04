@@ -3,22 +3,20 @@ package com.acme.recipes.database.dao
 import android.arch.lifecycle.LiveData
 import com.acme.recipes.database.entity.RecipeEntity
 import com.acme.recipes.database.entity.RecipeEntityFields
-import com.acme.recipes.database.util.RealmLiveData
-import com.acme.recipes.database.util.RealmResultsLiveData
+import com.acme.recipes.database.util.asLiveData
 import io.realm.Realm
 import io.realm.RealmQuery
 
 class RecipeDao(db: Realm) : Dao<RecipeEntity>(db) {
 
     fun findAllAsync(): LiveData<List<RecipeEntity>> {
-        return RealmResultsLiveData(where().findAllAsync())
+        return where().findAllAsync().asLiveData()
     }
 
     fun findByIdAsync(id: String): LiveData<RecipeEntity> {
-        return RealmLiveData(
-                where()
+        return  where()
                 .equalTo(RecipeEntityFields.ID, id)
-                .findFirstAsync())
+                .findFirstAsync().asLiveData()
     }
 
     private fun where(): RealmQuery<RecipeEntity> {

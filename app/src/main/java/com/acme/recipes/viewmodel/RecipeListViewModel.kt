@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import com.acme.recipes.database.dao.RecipeDao
+import com.acme.recipes.database.util.recipeDao
 import com.acme.recipes.model.Recipe
 import com.acme.recipes.service.RecipeStreamingService
 import io.realm.Realm
@@ -11,7 +12,7 @@ import io.realm.Realm
 class RecipeListViewModel : ViewModel() {
 
     private val database = Realm.getDefaultInstance()
-    private val dao = RecipeDao(database)
+    private val dao = database.recipeDao()
     private val recipeStreamingService = RecipeStreamingService()
 
     val recipes: LiveData<List<Recipe>>
