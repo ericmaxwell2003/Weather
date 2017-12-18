@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Layout needs cleaned up a bit, but has the basic components -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="weatherSummary" type="com.acme.weather.model.api.WeatherSummary" />
+        <variable name="itemClickListener" type="com.acme.weather.view.ItemClickListener"/>
+    </data>
+
+    <!--android:background="@{vm.weatherType()}"-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@mipmap/bg_sunny"
+            tools:background="@mipmap/bg_sunny"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:onClick="@{() ->  itemClickListener.onClick(weatherSummary)}">
+
+            <!--android:text="@{vm.currentTemp}"-->
+            <TextView
+                android:id="@+id/currentTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="64sp"
+                android:text="86"
+                tools:text="86"
+                />
+
+            <!--android:text="@{vm.scaleType}"-->
+            <TextView
+                android:id="@+id/scaleType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="F"
+                android:textSize="16sp"
+                tools:text="F"
+                />
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="100dp"
+                android:orientation="vertical">
+
+                <!--android:text="@{@string/highTemp(vm.high())}"-->
+                <TextView
+                    android:id="@+id/todayHighTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="High: 96"
+                    tools:text="High: 96"
+                    />
+
+                <!--android:text="@{@string/lowTemp(vm.low())}"-->
+                <TextView
+                    android:id="@+id/todayLowTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Low: 22"
+                    tools:text="Low: 22"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+</layout>

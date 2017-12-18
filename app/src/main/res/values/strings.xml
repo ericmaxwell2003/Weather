@@ -1,8 +1,4 @@
 <resources>
-    <string name="app_name">My Recipes</string>
-    <string name="ingredients_label">Ingredients</string>
-    <string name="ingredient_item">\u2022  %1$s</string>
-    <string name="calories">(%1$s calories)</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="recipe_count_msg">Recipe Count: %1$s</string>
+    <string name="app_name">Weather Forecast</string>
+    <string name="weather_forecast_label">Forecast</string>
 </resources>
