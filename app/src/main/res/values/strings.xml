@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Weather Forecast</string>
     <string name="weather_forecast_label">Forecast</string>
+    <string name="snowy">snowy</string>
 </resources>

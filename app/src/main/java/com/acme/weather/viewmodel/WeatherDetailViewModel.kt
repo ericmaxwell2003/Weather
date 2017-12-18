@@ -1,13 +1,18 @@
 package com.acme.weather.viewmodel
 
 import android.arch.lifecycle.ViewModel
+import com.acme.weather.model.api.Temperature
 import com.acme.weather.model.api.WeatherSummary
 
 class WeatherDetailViewModel : ViewModel() {
 
     val forecast = "All rain all day!"
 
-    val weatherSummary = WeatherSummary()
+    val weatherSummary = WeatherSummary(id=1, zip = "90706",
+            current = Temperature.fromFahrenheit(72),
+            high = Temperature.fromFahrenheit(100),
+            low = Temperature.fromFahrenheit(29))
+
 
 //    private val database = Realm.getDefaultInstance()
 //    private val dao = database.recipeDao()

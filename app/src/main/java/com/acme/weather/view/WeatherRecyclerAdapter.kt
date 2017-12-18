@@ -13,7 +13,7 @@ class WeatherRecyclerAdapter(private val clickListener: ItemClickListener<Weathe
 
     private var weatherSummaryList = emptyList<WeatherSummary>()
 
-    fun setRecipeList(weatherSummaryList: List<WeatherSummary>) {
+    fun setWeatherList(weatherSummaryList: List<WeatherSummary>) {
         this.weatherSummaryList = weatherSummaryList
         notifyDataSetChanged()
     }

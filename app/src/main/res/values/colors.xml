@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="bg_thunderstorm">#C7CDD3</color>
+    <color name="bg_snowy">#69A7EF</color>
+    <color name="bg_rainy">#C7CDD3</color>
+    <color name="bg_cloudy">#C6D7EE</color>
+    <color name="bg_partlycloudy">#D2E0F1</color>
+    <color name="bg_sunny">#BBDAFF</color>
 </resources>

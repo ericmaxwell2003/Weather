@@ -1,3 +1,3 @@
 package com.acme.weather.model.api
 
-data class WeatherDetail(val weatherDetail: WeatherDetail, val forecast: String)
+data class WeatherDetail(val weatherDetail: WeatherSummary, val forecast: String)

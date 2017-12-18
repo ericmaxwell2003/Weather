@@ -1,8 +1,10 @@
 package com.acme.weather.view
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +32,8 @@ class WeatherListFragment : Fragment() {
         weatherRecyclerAdapter = WeatherRecyclerAdapter(recipeClickListener)
         val recyclerView = root.findViewById<RecyclerView>(R.id.weather_list_recycler_view)
         recyclerView.adapter = weatherRecyclerAdapter
+        recyclerView.addItemDecoration(
+                DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         return root
 
     }
@@ -41,10 +45,10 @@ class WeatherListFragment : Fragment() {
                 .of(this)
                 .get(WeatherListViewModel::class.java)
 
-//        weatherListViewModel.recipes.observe(this, Observer { recipes ->
-//            if(recipes != null) {
-//                weatherRecyclerAdapter.setRecipeList(recipes)
-//            }
-//        })
+        weatherListViewModel.weatherSummaries.observe(this, Observer { weatherSummaryList ->
+            if(weatherSummaryList != null) {
+                weatherRecyclerAdapter.setWeatherList(weatherSummaryList)
+            }
+        })
     }
 }
