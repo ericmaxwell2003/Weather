@@ -6,15 +6,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.acme.weather.R
 import com.acme.weather.databinding.WeatherItemBinding
-import com.acme.weather.model.api.WeatherSummary
+import com.acme.weather.model.api.Weather
+import com.acme.weather.viewmodel.WeatherItemViewModel
+import com.acme.weather.viewmodel.WeatherListViewModel
 
-class WeatherRecyclerAdapter(private val clickListener: ItemClickListener<WeatherSummary>)
+class WeatherRecyclerAdapter(val weatherListViewModel: WeatherListViewModel)
     : RecyclerView.Adapter<WeatherRecyclerAdapter.RecipeViewHolder>() {
 
-    private var weatherSummaryList = emptyList<WeatherSummary>()
+    private var weatherList = emptyList<Weather>()
 
-    fun setWeatherList(weatherSummaryList: List<WeatherSummary>) {
-        this.weatherSummaryList = weatherSummaryList
+    fun setWeatherList(weatherList: List<Weather>) {
+        this.weatherList = weatherList
         notifyDataSetChanged()
     }
 
@@ -23,17 +25,23 @@ class WeatherRecyclerAdapter(private val clickListener: ItemClickListener<Weathe
                 .inflate<WeatherItemBinding>(LayoutInflater.from(parent.context),
                                             R.layout.weather_item,
                                             parent, false)
-
-        binding.itemClickListener = clickListener
         return RecipeViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        holder.binding.weatherSummary = weatherSummaryList[position]
+        val weatherItem = weatherList[position]
+        val weatherItemVm = WeatherItemViewModel(weatherList[position])
+        holder.binding.weatherItem.setOnClickListener {
+           if(weatherItem.id != null) {
+               weatherListViewModel.onLocationItemSelected(weatherItem.id)
+           }
+        }
+        holder.binding.vm = weatherItemVm
         holder.binding.executePendingBindings()
     }
 
-    override fun getItemCount() = weatherSummaryList.size
+    override fun getItemCount() = weatherList.size
 
-    class RecipeViewHolder(val binding: WeatherItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class RecipeViewHolder(val binding: WeatherItemBinding) :
+            RecyclerView.ViewHolder(binding.root)
 }

@@ -2,4 +2,11 @@
     <string name="app_name">Weather Forecast</string>
     <string name="weather_forecast_label">Forecast</string>
     <string name="snowy">snowy</string>
+
+    <string name="high_temp">High: %1$d</string>
+    <string name="low_temp">Low: %1$d</string>
+    <string name="fahrenheit">F</string>
+    <string name="celsius">C</string>
+    <string name="adding_location_progress_message">Adding Location...</string>
+
 </resources>

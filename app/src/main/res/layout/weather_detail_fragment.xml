@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <import type="android.view.View"/>
-        <variable name="vm" type="com.acme.weather.viewmodel.WeatherDetailViewModel"/>
+        <variable name="vm" type="com.acme.weather.viewmodel.WeatherItemViewModel"/>
     </data>
 
     <LinearLayout
@@ -16,7 +16,7 @@
 
     <include
         layout="@layout/weather_item"
-        app:weatherSummary="@{vm.weatherSummary}"/>
+        app:vm="@{vm}"/>
 
     <TextView
         android:layout_width="match_parent"

@@ -1,11 +1,18 @@
 package com.acme.weather.view
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import com.acme.weather.R
-import com.acme.weather.model.api.WeatherSummary
+import com.acme.weather.model.api.Weather
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
+
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,15 +26,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun show(weatherSummary: WeatherSummary) {
+    fun show(weatherId: Long) {
 
-        val recipeFragment = WeatherDetailFragment.forWeatherSummary(weatherSummary)
+        val weatherFragment = WeatherDetailFragment.forWeatherSummary(weatherId)
 
         supportFragmentManager
                 .beginTransaction()
-                .addToBackStack("recipe")
+                .addToBackStack("weather")
                 .replace(R.id.fragment_container,
-                        recipeFragment, null).commit()
+                        weatherFragment, null).commit()
     }
 
+    override fun supportFragmentInjector(): DispatchingAndroidInjector<Fragment> {
+        return dispatchingAndroidInjector
+    }
 }
+

@@ -5,10 +5,10 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import com.acme.weather.model.repository.database.dao.WeatherDao
-import com.acme.weather.model.repository.database.entity.Weather
+import com.acme.weather.model.repository.database.entity.WeatherEntity
 
 
-@Database(entities = arrayOf(Weather::class), version = 1)
+@Database(entities = arrayOf(WeatherEntity::class), version = 1)
 abstract class WeatherDatabase : RoomDatabase() {
 
     abstract fun weatherDao(): WeatherDao

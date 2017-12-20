@@ -1,40 +1,46 @@
 package com.acme.weather.view
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.RecyclerView
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.acme.weather.R
-import com.acme.weather.model.api.WeatherSummary
-import com.acme.weather.viewmodel.WeatherListViewModel
+import com.acme.weather.databinding.WeatherListFragmentBinding
+import com.acme.weather.di.Injectable
+import com.acme.weather.viewmodel.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.customView
+import org.jetbrains.anko.editText
+import org.jetbrains.anko.verticalLayout
+import timber.log.Timber
+import javax.inject.Inject
 
-class WeatherListFragment : Fragment() {
 
+class WeatherListFragment : Fragment(), Injectable {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private lateinit var binding: WeatherListFragmentBinding
     private lateinit var weatherRecyclerAdapter: WeatherRecyclerAdapter
     private lateinit var weatherListViewModel: WeatherListViewModel
-
-    private val recipeClickListener = ItemClickListener<WeatherSummary> { _ ->
-        //(activity as? MainActivity)?.show(recipe)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val root = LayoutInflater
-                .from(context)
-                .inflate(R.layout.weather_list_fragment, container, false)
+        binding = DataBindingUtil.inflate<WeatherListFragmentBinding>(
+                LayoutInflater.from(context),
+                R.layout.weather_list_fragment, container, false)
 
-        weatherRecyclerAdapter = WeatherRecyclerAdapter(recipeClickListener)
-        val recyclerView = root.findViewById<RecyclerView>(R.id.weather_list_recycler_view)
-        recyclerView.adapter = weatherRecyclerAdapter
-        recyclerView.addItemDecoration(
-                DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-        return root
+        return binding.root
 
     }
 
@@ -42,13 +48,83 @@ class WeatherListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         weatherListViewModel = ViewModelProviders
-                .of(this)
+                .of(this, viewModelFactory)
                 .get(WeatherListViewModel::class.java)
 
+        weatherRecyclerAdapter = WeatherRecyclerAdapter(weatherListViewModel)
+        val recyclerView = binding.weatherListRecyclerView
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = weatherRecyclerAdapter
+        recyclerView.addItemDecoration(
+                DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+
+        binding.vm = weatherListViewModel
+
         weatherListViewModel.weatherSummaries.observe(this, Observer { weatherSummaryList ->
-            if(weatherSummaryList != null) {
+            if (weatherSummaryList != null) {
                 weatherRecyclerAdapter.setWeatherList(weatherSummaryList)
             }
         })
+
+        weatherListViewModel.state.observe(this, Observer { state ->
+            when (state) {
+                is DEFAULT -> hideProgressDialog()
+                is LOCATION_ADD_PROMPT -> showZipDialog()
+                is LOCATION_ADD_PENDING -> showProgressDialog()
+                is LOCATION_ADD_FAILED -> showError(state.error)
+                is LOCATION_VIEW_DETAIL_PENDING -> showDetail(state.id)
+                null -> hideProgressDialog()
+            }
+        })
     }
+
+    fun showProgressDialog() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    fun hideProgressDialog() {
+        binding.progressBar.visibility = View.INVISIBLE
+    }
+
+    fun showError(error: String) {
+        hideProgressDialog()
+        val v = view
+        if(v != null) {
+            Snackbar.make(v, error, Snackbar.LENGTH_SHORT)
+        }
+    }
+
+    fun showDetail(id: Long) {
+        Timber.d("Moving to detail view")
+        (activity as MainActivity).show(id)
+        weatherListViewModel.onLocationViewDetail()
+    }
+
+    fun showZipDialog() {
+        hideProgressDialog()
+        val ctx = context
+        if (ctx != null) {
+            with(ctx) {
+                alert {
+                    customView {
+                        verticalLayout {
+                            val zip = editText {
+                                hint = "ZIP Code"
+                                inputType = InputType.TYPE_CLASS_NUMBER
+                            }
+                            positiveButton("Add") {
+                                weatherListViewModel.onLocationEntered(zip.text.toString())
+                            }
+                            negativeButton("Cancel") {
+                                Timber.d("Location add cancelled")
+                            }
+                        }
+                    }
+                }.show()
+            }
+        }
+    }
+
+
+
 }

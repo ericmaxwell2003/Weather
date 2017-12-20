@@ -1,12 +1,11 @@
-package com.acme.weather.com.acme.weather.model.repository.database
+package com.acme.weather.model.repository.database
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import com.acme.weather.model.repository.database.WeatherDatabase
 import com.acme.weather.model.repository.database.dao.WeatherDao
 import com.acme.weather.model.repository.database.entity.Temperature
-import com.acme.weather.model.repository.database.entity.Weather
+import com.acme.weather.model.repository.database.entity.WeatherEntity
 import org.hamcrest.Matchers.equalTo
 import org.junit.After
 import org.junit.Assert.assertThat
@@ -17,7 +16,7 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-internal class WeatherCrudTests {
+class WeatherEntityCrudTest {
 
     private lateinit var weatherDao: WeatherDao
     private lateinit var db: WeatherDatabase
@@ -57,11 +56,58 @@ internal class WeatherCrudTests {
         }
     }
 
-    private fun createWeather() = Weather().apply {
-        latitude = 13
-        longitude = 52
+    @Test
+    fun testFindByZip() {
+        val springfieldWeather = createWeather().apply { zip = "45503" }
+        val columbusWeather = createWeather().apply { zip = "43231" }
+
+        weatherDao.insertOrUpdate(springfieldWeather)
+        weatherDao.insertOrUpdate(columbusWeather)
+
+        val byZip = weatherDao.byZip("45503")
+        byZip.observeForever {
+            assertThat(it?.zip, equalTo("45503"))
+        }
+    }
+
+    @Test
+    fun testFindAll() {
+        val springfieldWeather = createWeather().apply { zip = "45503" }
+        val columbusWeather = createWeather().apply { zip = "43231" }
+
+        weatherDao.insertOrUpdate(springfieldWeather)
+        weatherDao.insertOrUpdate(columbusWeather)
+
+        val all = weatherDao.findAll()
+        all.observeForever {}
+        assertThat(all.value?.count(), equalTo(2))
+    }
+
+    @Test
+    fun testDelete() {
+        val weather = createWeather()
+        val id = weatherDao.insertOrUpdate(weather)
+        weather.id = id
+
+        val all = weatherDao.findAll()
+        all.observeForever {}
+
+        // Assert 1 entry
+        assertThat(all.value?.count(), equalTo(1))
+
+        // Delete it
+        weatherDao.delete(weather)
+
+        // Assert 0 entries
+        assertThat(all.value?.count(), equalTo(0))
+    }
+
+
+    private fun createWeather() = WeatherEntity().apply {
+        latitude = "13"
+        longitude = "52"
         zip = "90706"
-        forecast = "Sunny with a chance of rain."
+        forecast = "Sunny with perfect temperatures and never a chance of rain."
         locationName = "Bellflower, CA"
         currentTemp = createTemperature()
         highTemp = createTemperature()
