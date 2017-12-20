@@ -1,8 +1,10 @@
 package com.acme.weather.view
 
+import android.app.DialogFragment
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.DialogInterface
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -13,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.acme.weather.R
+import com.acme.weather.WeatherApplication
 import com.acme.weather.databinding.WeatherListFragmentBinding
 import com.acme.weather.di.Injectable
 import com.acme.weather.viewmodel.*
@@ -33,8 +36,29 @@ class WeatherListFragment : Fragment(), Injectable {
     private lateinit var weatherRecyclerAdapter: WeatherRecyclerAdapter
     private lateinit var weatherListViewModel: WeatherListViewModel
 
+    private lateinit var enterZipDialog: DialogInterface
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        enterZipDialog = with(context!!) {
+            alert {
+                customView {
+                    verticalLayout {
+                        val zip = editText {
+                            hint = "ZIP Code"
+                            inputType = android.text.InputType.TYPE_CLASS_NUMBER
+                        }
+                        positiveButton("Add") {
+                            weatherListViewModel.onLocationEntered(zip.text.toString())
+                        }
+                        negativeButton("Cancel") {
+                            timber.log.Timber.d("Location add cancelled")
+                        }
+                    }
+                }
+            }.build()
+        }
 
         binding = DataBindingUtil.inflate<WeatherListFragmentBinding>(
                 LayoutInflater.from(context),
@@ -102,29 +126,11 @@ class WeatherListFragment : Fragment(), Injectable {
 
     fun showZipDialog() {
         hideProgressDialog()
-        val ctx = context
-        if (ctx != null) {
-            with(ctx) {
-                alert {
-                    customView {
-                        verticalLayout {
-                            val zip = editText {
-                                hint = "ZIP Code"
-                                inputType = InputType.TYPE_CLASS_NUMBER
-                            }
-                            positiveButton("Add") {
-                                weatherListViewModel.onLocationEntered(zip.text.toString())
-                            }
-                            negativeButton("Cancel") {
-                                Timber.d("Location add cancelled")
-                            }
-                        }
-                    }
-                }.show()
-            }
-        }
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (activity?.application as? WeatherApplication)?.refWatcher?.watch(this)
+    }
 
 }

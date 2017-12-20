@@ -2,6 +2,7 @@ package com.acme.weather
 
 import android.app.Activity
 import com.acme.weather.di.AppInjector
+import com.squareup.leakcanary.LeakCanary
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import timber.log.Timber

@@ -10,10 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.acme.weather.R
+import com.acme.weather.WeatherApplication
 import com.acme.weather.databinding.WeatherDetailFragmentBinding
-import com.acme.weather.databinding.WeatherListFragmentBinding
 import com.acme.weather.di.Injectable
-import com.acme.weather.model.api.Weather
 import com.acme.weather.viewmodel.WeatherDetailViewModel
 import javax.inject.Inject
 
@@ -67,4 +66,10 @@ class WeatherDetailFragment : Fragment(), Injectable {
             return fragment
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (activity?.application as? WeatherApplication)?.refWatcher?.watch(this)
+    }
+
 }
