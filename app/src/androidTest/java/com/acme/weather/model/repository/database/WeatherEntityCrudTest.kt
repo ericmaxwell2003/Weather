@@ -4,7 +4,7 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.acme.weather.model.repository.database.dao.WeatherDao
-import com.acme.weather.model.repository.database.entity.Temperature
+import com.acme.weather.model.repository.database.entity.TemperatureEntity
 import com.acme.weather.model.repository.database.entity.WeatherEntity
 import org.hamcrest.Matchers.equalTo
 import org.junit.After
@@ -114,7 +114,7 @@ class WeatherEntityCrudTest {
         lowTemp = createTemperature()
     }
 
-    private fun createTemperature() = Temperature().apply {
+    private fun createTemperature() = TemperatureEntity().apply {
         fahrenheit = 212
         celsius = 100
     }
