@@ -1,6 +1,9 @@
-### RealmArchComponentsRecipesApp
-Simple Recipes App that uses Realm w/ Android Architecture Components (written in Kotlin)
+### Weather
+This is a demo app built for teaching concepts.
+
+###
+Status WIP - It's not complete yet but working
 
 ### Screenshots
-![Recipes for your favoriate Android Sweets!](RecipesApp.png).
+![Get the weather forecast in your city!](WeatherAppScreenshots.png).
 

@@ -9,11 +9,16 @@ import javax.inject.Inject
 class WeatherDetailViewModel @Inject constructor(
         private val weatherRepository: WeatherRepository) : ViewModel() {
 
-    var weather: LiveData<WeatherItemViewModel>? = null
+    var weatherViewModel: LiveData<WeatherItemViewModel>? = null
 
-    fun setWeatherId(id: Long) {
-        weather = Transformations.map(weatherRepository.byIdentifier(id), {
-            WeatherItemViewModel(it)
+    /**
+     * Set the id of the weather to show and whether to show celsius or fahrenheit.
+     * Ideally the preference on which unit to display should come from
+     * some sort of persistent setting, but this is just a simple example.
+     */
+    fun setWeatherId(id: Long, shouldShowFahrenheit: Boolean) {
+        weatherViewModel = Transformations.map(weatherRepository.byIdentifier(id), {
+            WeatherItemViewModel(weather = it, showFahrenheit = shouldShowFahrenheit)
         })
     }
 

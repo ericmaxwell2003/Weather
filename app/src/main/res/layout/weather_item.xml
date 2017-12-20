@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="84dp"
                 android:layout_marginStart="8dp"
-                android:text="@{vm.currentTemp}"
+                android:text="@{vm.currentTemp.toString()}"
                 android:textSize="64sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,6 @@
                 app:layout_constraintStart_toStartOf="@+id/currentTemp"
                 />
 
-            <!--android:text="@{vm.scaleType}"-->
             <TextView
                 android:id="@+id/scaleType"
                 android:layout_width="wrap_content"
@@ -57,7 +56,7 @@
                 app:layout_constraintStart_toEndOf="@id/currentTemp"
                 app:layout_constraintTop_toTopOf="@id/currentTemp"
                 app:layout_constraintVertical_bias="0.32"
-                android:text="@{vm.showingFahrenheit ? @string/fahrenheit : @string/celsius}"
+                android:text="@{vm.showFahrenheit ? @string/fahrenheit : @string/celsius}"
                 tools:text="F" />
 
             <TextView
@@ -88,7 +87,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/todayHighTemp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="Low: 22"
-                android:text= "@{@string/low_temp(vm.lowTemp)}"
+                android:text="@{@string/low_temp(vm.lowTemp)}"
                 />
 
             <ImageView

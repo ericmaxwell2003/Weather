@@ -34,7 +34,6 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             app:fabSize="normal"
-            android:onClick="@{() -> vm.onAddLocationClicked()}"
             android:tint="@color/cardview_light_background"
             app:backgroundTint="@color/colorPrimaryDark"
             app:srcCompat="@android:drawable/ic_input_add" />

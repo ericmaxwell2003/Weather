@@ -1,5 +1,6 @@
 package com.acme.weather.model.repository.database.entity
 
+import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 
@@ -17,8 +18,13 @@ class WeatherEntity {
     var iconDescription: String? = null
     var forecast: String? = null
 
-    var currentTemp: Int = 0
-    var highTemp : Int = 0
-    var lowTemp: Int = 0
+    @Embedded(prefix = "current_")
+    var currentTemp: TemperatureEntity = TemperatureEntity()
+
+    @Embedded(prefix = "high_")
+    var highTemp: TemperatureEntity = TemperatureEntity()
+
+    @Embedded(prefix = "low_")
+    var lowTemp: TemperatureEntity = TemperatureEntity()
 
 }

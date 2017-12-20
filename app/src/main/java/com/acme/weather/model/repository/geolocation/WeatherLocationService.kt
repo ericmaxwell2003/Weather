@@ -1,4 +1,4 @@
-package com.acme.weather.model
+package com.acme.weather.model.repository.geolocation
 
 import android.location.Geocoder
 import com.acme.weather.model.api.Location

@@ -42,11 +42,11 @@ class WeatherDetailFragment : Fragment(), Injectable {
                 .of(this, viewModelFactory)
                 .get(WeatherDetailViewModel::class.java)
 
-        if(weatherId != null && viewModel.weather == null) {
-            viewModel.setWeatherId(weatherId)
+        if(weatherId != null && viewModel.weatherViewModel == null) {
+            viewModel.setWeatherId(weatherId, true)
         }
 
-        viewModel.weather?.observe(this, Observer { weather ->
+        viewModel.weatherViewModel?.observe(this, Observer { weather ->
             if(weather != null) {
                 binding.vm = weather
             }

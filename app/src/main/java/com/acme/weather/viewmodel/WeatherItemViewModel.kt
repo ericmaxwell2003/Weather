@@ -2,19 +2,19 @@ package com.acme.weather.viewmodel
 
 import com.acme.weather.model.api.Weather
 
-class WeatherItemViewModel(weather: Weather) {
+/**
+ * Simplified Value Model object to display weather.
+ */
+class WeatherItemViewModel(weather: Weather, val showFahrenheit: Boolean)  {
 
-    var bgColor = weather.weatherIcon.bgColorRestId
-    var currentTemp = weather.current?.fahrenheit?.toString() ?: "0"
-    var location = weather.location.locationName
-    var showingFahrenheit = true
+    val bgColor = weather.forecastData?.weatherIcon?.backgroundColorResourceId ?: 0
+    val location = weather.location.locationName
+    val weatherIconContentDesc = weather.forecastData?.weatherIcon?.description
+    val weatherIcon = weather.forecastData?.weatherIcon?.iconResourceId ?: 0
+    val forecast = weather.forecastData?.forecast
 
-    var highTemp = weather.high?.fahrenheit ?: 0
-    var lowTemp = weather.low?.fahrenheit ?: 0
+    val currentTemp = weather.forecastData?.current?.run { if(showFahrenheit) fahrenheit else celsius }
+    val highTemp = weather.forecastData?.high?.run { if(showFahrenheit) fahrenheit else celsius }
+    val lowTemp = weather.forecastData?.low?.run { if(showFahrenheit) fahrenheit else celsius }
 
-    var weatherIconContentDesc = weather.weatherIcon.descriptions[0]
-    var weatherIcon = weather.weatherIcon.icResId
-
-    var forecast = weather.forecast
-
-}
+ }

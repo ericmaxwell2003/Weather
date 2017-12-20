@@ -2,14 +2,14 @@ package com.acme.weather.model.repository
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
-import com.acme.weather.model.api.Location
-import com.acme.weather.model.api.Temperature
-import com.acme.weather.model.api.Weather
-import com.acme.weather.model.api.WeatherIcon
+import com.acme.weather.model.api.*
 import com.acme.weather.model.repository.database.WeatherDatabase
+import com.acme.weather.model.repository.database.dao.WeatherDao
+import com.acme.weather.model.repository.database.entity.TemperatureEntity
 import com.acme.weather.model.repository.database.entity.WeatherEntity
 import com.acme.weather.model.repository.network.WeatherApi
 import com.acme.weather.model.repository.network.WeatherApiResponse
+import com.acme.weather.model.repository.network.WeatherForecastService
 import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.doAsync
@@ -19,9 +19,7 @@ import kotlin.math.roundToInt
 
 @Singleton
 class WeatherRepository @Inject constructor(
-        database: WeatherDatabase, private val weatherApi: WeatherApi) {
-
-    private val weatherDao = database.weatherDao()
+        private val weatherDao: WeatherDao, private val weatherForecastService: WeatherForecastService) {
 
     val weatherList: LiveData<List<Weather>> by lazy {
         updateLocalCache() // refresh underlying data in remote service.
@@ -30,7 +28,7 @@ class WeatherRepository @Inject constructor(
 
     fun byIdentifier(id: Long) : LiveData<Weather> {
         return Transformations.map(weatherDao.byId(id), {
-            mapWeatherEntityToWeatherSummaryApi(it)
+            entityToDto(it)
         })
     }
 
@@ -56,31 +54,24 @@ class WeatherRepository @Inject constructor(
     }
 
     private fun updateLocalCache() {
-
         doAsync {
             val weather = weatherDao.findAllSync()
             weather.forEach { w ->
-                val latLong = "${w.latitude},${w.longitude}"
-                val apiResp = weatherApi
-                        .getWeatherForCoordinate(latLong)
-                        .blockingGet()
-                updateWeatherFromApiResp(w, apiResp)
+                val forecastData = weatherForecastService
+                        .getWeatherForecast(latitude = w.latitude, longitude = w.longitude)
+                applyForecast(w, forecastData)
                 weatherDao.insertOrUpdate(w)
             }
         }
     }
 
     private fun fetchWeatherFromDatabase() : LiveData<List<Weather>> {
-
         return Transformations.map(weatherDao.findAll(), { weatherObjects ->
-            weatherObjects.map {
-                mapWeatherEntityToWeatherSummaryApi(it)
-            }
+            weatherObjects.map { entityToDto(it) }
         })
-
     }
 
-    private fun mapWeatherEntityToWeatherSummaryApi(it: WeatherEntity) : Weather {
+    private fun entityToDto(it: WeatherEntity) : Weather {
         return Weather(
                 id = it.id,
                 location =  Location(
@@ -89,28 +80,33 @@ class WeatherRepository @Inject constructor(
                         longitude = it.longitude,
                         locationName = it.locationName
                 ),
-                current = Temperature.fromFahrenheit(it.currentTemp),
-                high = Temperature.fromFahrenheit(it.highTemp),
-                low = Temperature.fromFahrenheit(it.lowTemp),
-                weatherIcon = WeatherIcon.fromDescription(it.iconDescription),
-                forecast = it.forecast)
-                
+                forecastData = ForecastData(
+                        current = entityToDto(it.currentTemp),
+                        high = entityToDto(it.highTemp),
+                        low = entityToDto(it.lowTemp),
+                        weatherIcon = WeatherIcon.fromDescription(it.iconDescription),
+                        forecast = it.forecast))
     }
 
-    private fun updateWeatherFromApiResp(w: WeatherEntity, apiResp: WeatherApiResponse) {
-        w.currentTemp = apiResp.currently.temperature.roundToInt()
-        w.iconDescription = apiResp.currently.icon
-        w.forecast = apiResp.daily.summary
-        w.highTemp = apiResp.daily.data
-                .sortedByDescending { it.temperatureHigh }
-                .firstOrNull()
-                ?.temperatureHigh
-                ?.roundToInt() ?: 0
-        w.lowTemp = apiResp.daily.data
-                .sortedByDescending { it.temperatureLow }
-                .firstOrNull()
-                ?.temperatureLow
-                ?.roundToInt() ?: 0
+    private fun entityToDto(it: TemperatureEntity) : Temperature {
+        return Temperature(fahrenheit = it.fahrenheit, celsius = it.celsius)
+    }
+
+    private fun applyForecast(w: WeatherEntity, forecastData: ForecastData) {
+        w.forecast = forecastData.forecast
+        w.iconDescription = forecastData.weatherIcon.description
+        w.currentTemp = TemperatureEntity().apply {
+            fahrenheit = forecastData.current?.fahrenheit ?: 0
+            celsius = forecastData.current?.celsius ?: 0
+        }
+        w.highTemp = TemperatureEntity().apply {
+            fahrenheit = forecastData.high?.fahrenheit ?: 0
+            celsius = forecastData.high?.celsius ?: 0
+        }
+        w.lowTemp = TemperatureEntity().apply {
+            fahrenheit = forecastData.low?.fahrenheit ?: 0
+            celsius = forecastData.low?.celsius ?: 0
+        }
     }
 
 }

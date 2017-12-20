@@ -2,6 +2,7 @@ package com.acme.weather.di
 
 import android.app.Application
 import com.acme.weather.model.repository.network.WeatherApi
+import com.acme.weather.model.repository.network.WeatherForecastService
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -30,6 +31,11 @@ open class NetworkModule {
     @Provides
     internal fun retrofit(okHttpClientBuilder: OkHttpClient.Builder): Retrofit {
         return retrofitBuilder(okHttpClientBuilder).build()
+    }
+
+    @Provides
+    internal fun weatherForecastService(weatherApi: WeatherApi) : WeatherForecastService {
+        return WeatherForecastService(weatherApi)
     }
 
     @Provides

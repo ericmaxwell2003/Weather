@@ -3,7 +3,6 @@ package com.acme.weather.view
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.content.DialogInterface
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -16,9 +15,15 @@ import com.acme.weather.R
 import com.acme.weather.WeatherApplication
 import com.acme.weather.databinding.WeatherListFragmentBinding
 import com.acme.weather.di.Injectable
-import com.acme.weather.viewmodel.*
-import org.jetbrains.anko.*
-import timber.log.Timber
+import com.acme.weather.viewmodel.DEFAULT
+import com.acme.weather.viewmodel.LOCATION_ADD_FAILED
+import com.acme.weather.viewmodel.LOCATION_ADD_PENDING
+import com.acme.weather.viewmodel.WeatherListViewModel
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.appcompat.v7.Appcompat
+import org.jetbrains.anko.customView
+import org.jetbrains.anko.editText
+import org.jetbrains.anko.verticalLayout
 import javax.inject.Inject
 
 
@@ -49,7 +54,10 @@ class WeatherListFragment : Fragment(), Injectable {
                 .of(this, viewModelFactory)
                 .get(WeatherListViewModel::class.java)
 
-        weatherRecyclerAdapter = WeatherRecyclerAdapter(weatherListViewModel)
+        weatherRecyclerAdapter = WeatherRecyclerAdapter(
+                   onItemClick = { id -> showDetail(id) },
+                   onItemLongClick = { id -> weatherListViewModel.onLocationDeleted(id) })
+
         val recyclerView = binding.weatherListRecyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = weatherRecyclerAdapter
@@ -67,13 +75,13 @@ class WeatherListFragment : Fragment(), Injectable {
         weatherListViewModel.state.observe(this, Observer { state ->
             when (state) {
                 is DEFAULT -> hideProgressDialog()
-                is LOCATION_ADD_PROMPT -> showZipDialog()
                 is LOCATION_ADD_PENDING -> showProgressDialog()
                 is LOCATION_ADD_FAILED -> showError(state.error)
-                is LOCATION_VIEW_DETAIL_PENDING -> showDetail(state.id)
                 null -> hideProgressDialog()
             }
         })
+
+        binding.fabAddZip.setOnClickListener { showZipDialog() }
     }
 
     fun showProgressDialog() {
@@ -93,15 +101,14 @@ class WeatherListFragment : Fragment(), Injectable {
     }
 
     fun showDetail(id: Long) {
-        Timber.d("Moving to detail view")
         (activity as MainActivity).show(id)
-        weatherListViewModel.onLocationViewDetail()
     }
 
     fun showZipDialog() {
         hideProgressDialog()
         context?.apply {
             alert {
+                Appcompat
                 customView {
                     verticalLayout {
                         val zip = editText {
