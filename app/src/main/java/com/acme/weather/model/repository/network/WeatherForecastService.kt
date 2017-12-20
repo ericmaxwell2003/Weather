@@ -9,7 +9,7 @@ import kotlin.math.roundToInt
 class WeatherForecastService @Inject constructor(private val weatherApi: WeatherApi) {
 
     /**
-     * Blocking call to get weather forecast data given (lat,long) coordinates.
+     * Blocking call to get weatherList forecast data given (lat,long) coordinates.
      */
     fun getWeatherForecast(latitude: String, longitude: String): ForecastData {
 

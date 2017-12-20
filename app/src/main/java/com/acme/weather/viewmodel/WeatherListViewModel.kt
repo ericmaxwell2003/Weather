@@ -1,6 +1,7 @@
 package com.acme.weather.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import com.acme.weather.model.repository.geolocation.WeatherLocationService
 import com.acme.weather.model.repository.WeatherRepository
@@ -17,7 +18,9 @@ class WeatherListViewModel @Inject constructor(
         val weatherRepository: WeatherRepository,
         val weatherLocationService: WeatherLocationService) : ViewModel() {
 
-    val weather = weatherRepository.weatherList
+    val weatherList = weatherRepository.weatherList
+
+    val shouldPreferFahrenheit = MutableLiveData<Boolean>().apply { value = true }
     val state = MutableLiveData<State>().apply{ value = DEFAULT() }
 
     fun onLocationEntered(zip: String) {
@@ -39,5 +42,9 @@ class WeatherListViewModel @Inject constructor(
         weatherRepository.removeWeatherLocation(id)
     }
 
+    fun toggleUnitOfMeasurement() {
+        val currentState: Boolean = shouldPreferFahrenheit.value ?: true
+        shouldPreferFahrenheit.value = !currentState
+    }
 }
 

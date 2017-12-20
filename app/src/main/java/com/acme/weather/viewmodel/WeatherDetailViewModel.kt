@@ -12,7 +12,7 @@ class WeatherDetailViewModel @Inject constructor(
     var weatherViewModel: LiveData<WeatherItemViewModel>? = null
 
     /**
-     * Set the id of the weather to show and whether to show celsius or fahrenheit.
+     * Set the id of the weatherList to show and whether to show celsius or fahrenheit.
      * Ideally the preference on which unit to display should come from
      * some sort of persistent setting, but this is just a simple example.
      */

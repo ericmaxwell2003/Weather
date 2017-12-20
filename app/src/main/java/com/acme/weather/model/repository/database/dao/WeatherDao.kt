@@ -15,13 +15,13 @@ interface WeatherDao {
     @Query("SELECT * FROM weather")
     fun findAllSync(): List<WeatherEntity>
 
-    @Query("SELECT * FROM weather where id = (:id)")
+    @Query("SELECT * FROM weather WHERE id = (:id)")
     fun byId(id: Long): LiveData<WeatherEntity>
 
-    @Query("SELECT * FROM weather where id = (:id)")
+    @Query("SELECT * FROM weather WHERE id = (:id)")
     fun byIdSync(id: Long): WeatherEntity
 
-    @Query("SELECT * FROM weather where zip = (:zip)")
+    @Query("SELECT * FROM weather WHERE zip = (:zip)")
     fun byZip(zip: String): LiveData<WeatherEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

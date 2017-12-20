@@ -14,7 +14,13 @@ class WeatherRecyclerAdapter(
         private val onItemLongClick: (id: Long) -> Unit)
     : RecyclerView.Adapter<WeatherRecyclerAdapter.RecipeViewHolder>() {
 
+    private var showFahrenheit = true
     private var weatherList = emptyList<Weather>()
+
+    fun setUnitOfTemperaturePreference(shouldShowFahrenheit: Boolean) {
+        this.showFahrenheit = shouldShowFahrenheit
+        notifyDataSetChanged()
+    }
 
     fun setWeatherList(weatherList: List<Weather>) {
         this.weatherList = weatherList
@@ -31,7 +37,7 @@ class WeatherRecyclerAdapter(
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         val weatherItem = weatherList[position]
-        val weatherItemVm = WeatherItemViewModel(weatherList[position], true)
+        val weatherItemVm = WeatherItemViewModel(weatherList[position], showFahrenheit)
         holder.binding.weatherItem.apply {
             setOnClickListener {
                 if(weatherItem.id != null) {

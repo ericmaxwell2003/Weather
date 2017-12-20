@@ -8,9 +8,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.acme.weather.R
 import com.acme.weather.WeatherApplication
 import com.acme.weather.databinding.WeatherListFragmentBinding
@@ -35,6 +33,26 @@ class WeatherListFragment : Fragment(), Injectable {
     private lateinit var binding: WeatherListFragmentBinding
     private lateinit var weatherRecyclerAdapter: WeatherRecyclerAdapter
     private lateinit var weatherListViewModel: WeatherListViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, menuInflater: MenuInflater?) {
+        menuInflater?.inflate(R.menu.weather_menu, menu)
+        super.onCreateOptionsMenu(menu, menuInflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.toggle_units -> {
+                weatherListViewModel.toggleUnitOfMeasurement()
+                return true
+            }
+            else -> return super.onContextItemSelected(item)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -66,10 +84,14 @@ class WeatherListFragment : Fragment(), Injectable {
 
         binding.vm = weatherListViewModel
 
-        weatherListViewModel.weather.observe(this, Observer { weatherSummaryList ->
+        weatherListViewModel.weatherList.observe(this, Observer { weatherSummaryList ->
             if (weatherSummaryList != null) {
                 weatherRecyclerAdapter.setWeatherList(weatherSummaryList)
             }
+        })
+
+        weatherListViewModel.shouldPreferFahrenheit.observe(this, Observer {
+            weatherRecyclerAdapter.setUnitOfTemperaturePreference(shouldShowFahrenheit = it ?: true)
         })
 
         weatherListViewModel.state.observe(this, Observer { state ->
@@ -101,7 +123,8 @@ class WeatherListFragment : Fragment(), Injectable {
     }
 
     fun showDetail(id: Long) {
-        (activity as MainActivity).show(id)
+        (activity as MainActivity).show(id,
+                weatherListViewModel.shouldPreferFahrenheit.value ?: true)
     }
 
     fun showZipDialog() {

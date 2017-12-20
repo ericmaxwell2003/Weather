@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.acme.weather.R
@@ -14,6 +15,7 @@ import com.acme.weather.WeatherApplication
 import com.acme.weather.databinding.WeatherDetailFragmentBinding
 import com.acme.weather.di.Injectable
 import com.acme.weather.viewmodel.WeatherDetailViewModel
+import timber.log.Timber
 import javax.inject.Inject
 
 class WeatherDetailFragment : Fragment(), Injectable {
@@ -33,17 +35,28 @@ class WeatherDetailFragment : Fragment(), Injectable {
         return binding.root
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.toggle_units -> {
+                Timber.d("Toggle units")
+                return true
+            }
+            else -> return super.onContextItemSelected(item)
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         val weatherId = arguments?.getLong(WEATHER_ITEM_ID_KEY)
+        val shouldShowFahrenheit = arguments?.getBoolean(USE_FAHRENHEIT_KEY) ?: true
 
         val viewModel = ViewModelProviders
                 .of(this, viewModelFactory)
                 .get(WeatherDetailViewModel::class.java)
 
         if(weatherId != null && viewModel.weatherViewModel == null) {
-            viewModel.setWeatherId(weatherId, true)
+            viewModel.setWeatherId(weatherId, shouldShowFahrenheit)
         }
 
         viewModel.weatherViewModel?.observe(this, Observer { weather ->
@@ -57,11 +70,13 @@ class WeatherDetailFragment : Fragment(), Injectable {
     companion object {
 
         private val WEATHER_ITEM_ID_KEY = "weather_id"
+        private val USE_FAHRENHEIT_KEY = "should_use_fahrenheit"
 
-        fun forWeatherSummary(weatherId: Long): WeatherDetailFragment {
+        fun forWeatherSummary(weatherId: Long, displayAsFahrenheit: Boolean): WeatherDetailFragment {
             val fragment = WeatherDetailFragment()
             val args = Bundle()
             args.putLong(WEATHER_ITEM_ID_KEY, weatherId)
+            args.putBoolean(USE_FAHRENHEIT_KEY, displayAsFahrenheit)
             fragment.arguments = args
             return fragment
         }

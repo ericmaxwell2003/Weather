@@ -3,7 +3,7 @@ package com.acme.weather.viewmodel
 import com.acme.weather.model.api.Weather
 
 /**
- * Simplified Value Model object to display weather.
+ * Simplified Value Model object to display weatherList.
  */
 class WeatherItemViewModel(weather: Weather, val showFahrenheit: Boolean)  {
 

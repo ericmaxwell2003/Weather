@@ -21,7 +21,7 @@ abstract class WeatherDatabase : RoomDatabase() {
                         .allowMainThreadQueries()
                         .build()
             } else {
-                Room.databaseBuilder(context, WeatherDatabase::class.java, "weather.db")
+                Room.databaseBuilder(context, WeatherDatabase::class.java, "weatherList.db")
                         .fallbackToDestructiveMigration()
                         .build()
             }

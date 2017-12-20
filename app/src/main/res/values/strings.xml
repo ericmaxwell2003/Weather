@@ -8,5 +8,6 @@
     <string name="fahrenheit">F</string>
     <string name="celsius">C</string>
     <string name="adding_location_progress_message">Adding Location...</string>
+    <string name="unit_toggle_label">F / C</string>
 
 </resources>

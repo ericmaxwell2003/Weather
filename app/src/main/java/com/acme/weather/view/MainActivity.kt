@@ -1,10 +1,13 @@
 package com.acme.weather.view
 
+import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import com.acme.weather.R
-import com.acme.weather.model.api.Weather
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
@@ -26,13 +29,14 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         }
     }
 
-    fun show(weatherId: Long) {
+    fun show(weatherId: Long, displayAsFahrenheit: Boolean) {
 
-        val weatherFragment = WeatherDetailFragment.forWeatherSummary(weatherId)
+        val weatherFragment = WeatherDetailFragment
+                .forWeatherSummary(weatherId, displayAsFahrenheit)
 
         supportFragmentManager
                 .beginTransaction()
-                .addToBackStack("weather")
+                .addToBackStack("weatherList")
                 .replace(R.id.fragment_container,
                         weatherFragment, null).commit()
     }
