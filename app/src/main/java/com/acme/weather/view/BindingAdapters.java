@@ -7,7 +7,7 @@ import android.support.annotation.DrawableRes;
 import android.view.View;
 import android.widget.ImageView;
 
-public class ViewBindings {
+public class BindingAdapters {
 
     @BindingAdapter("app:weatherIcon")
     public static void showWeatherIcon(ImageView imageView, @DrawableRes int id) {

@@ -9,10 +9,13 @@ import com.acme.weather.databinding.WeatherItemBinding
 import com.acme.weather.model.api.Weather
 import com.acme.weather.viewmodel.WeatherItemViewModel
 import com.acme.weather.viewmodel.WeatherListViewModel
+import org.jetbrains.anko.coroutines.experimental.asReference
+import java.lang.ref.WeakReference
 
-class WeatherRecyclerAdapter(val weatherListViewModel: WeatherListViewModel)
+class WeatherRecyclerAdapter(weatherListViewModel: WeatherListViewModel)
     : RecyclerView.Adapter<WeatherRecyclerAdapter.RecipeViewHolder>() {
 
+    private val weakWeatherListViewModel = WeakReference(weatherListViewModel)
     private var weatherList = emptyList<Weather>()
 
     fun setWeatherList(weatherList: List<Weather>) {
@@ -31,11 +34,21 @@ class WeatherRecyclerAdapter(val weatherListViewModel: WeatherListViewModel)
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         val weatherItem = weatherList[position]
         val weatherItemVm = WeatherItemViewModel(weatherList[position])
-        holder.binding.weatherItem.setOnClickListener {
-           if(weatherItem.id != null) {
-               weatherListViewModel.onLocationItemSelected(weatherItem.id)
-           }
+        holder.binding.weatherItem.apply {
+
+            setOnClickListener {
+                if(weatherItem.id != null) {
+                    weakWeatherListViewModel.get()?.onLocationItemSelected(weatherItem.id)
+                }
+            }
+            setOnLongClickListener {
+                if(weatherItem.id != null) {
+                    weakWeatherListViewModel.get()?.onLocationDeleted(weatherItem.id)
+                }
+                true
+            }
         }
+
         holder.binding.vm = weatherItemVm
         holder.binding.executePendingBindings()
     }

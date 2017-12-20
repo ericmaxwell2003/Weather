@@ -19,7 +19,7 @@ class WeatherListViewModel @Inject constructor(
         val weatherRepository: WeatherRepository, val weatherLocationService: WeatherLocationService)
     : ViewModel() {
 
-    val weatherSummaries = weatherRepository.weatherList
+    val weather = weatherRepository.weatherList
     val state = MutableLiveData<State>().apply{ value = DEFAULT() }
 
     fun onAddLocationClicked() {
@@ -39,6 +39,10 @@ class WeatherListViewModel @Inject constructor(
                 state.postValue(LOCATION_ADD_FAILED("Location not found"))
             }
         }
+    }
+
+    fun onLocationDeleted(id: Long) {
+        weatherRepository.removeWeatherLocation(id)
     }
 
     fun onLocationItemSelected(id: Long) {

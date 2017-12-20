@@ -34,6 +34,12 @@ class WeatherRepository @Inject constructor(
         })
     }
 
+    fun removeWeatherLocation(id: Long) {
+        doAsync {
+            weatherDao.delete(weatherDao.byIdSync(id))
+        }
+    }
+
     fun addWeatherLocation(location: Location) {
 
         doAsync {
