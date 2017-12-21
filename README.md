@@ -1,9 +1,21 @@
 ### Weather
-This is a demo app built for teaching concepts.
+This is a demo app built for teaching concepts.  It shows the weather for various cities by zip.
 
-###
-Status WIP - It's not complete yet but working
+### Usage
+
+1. Add a zip code.
+2. It reverse geocodes the lat/long and location name from the zip code.
+3. Uses the [darksky.net](https://darksky.net) weather API to fetch current forecast data.
+4. Stores all of the data on device, persistent across launches.
+5. Weather forecast data is cached, but refreshed by the repository on launch.
+
+### Libraries + Concepts
+* *Architectural Patterns* - Model-View-ViewModel, Repository, Dependency Injection.
+* *Android GeoCoder API* - For reverse geocoding the zip code.
+* *Architecture Compnents* - LiveData, Room, ViewModel.
 
 ### Screenshots
 ![Get the weatherList forecast in your city!](WeatherAppScreenshots.png).
 
+### Status
+This is a work in progress, still adding tests and cleaning up organization.
