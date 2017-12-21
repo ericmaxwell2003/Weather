@@ -9,7 +9,7 @@ The way it works is you:
 3. Uses the [darksky.net](https://darksky.net) weather API to fetch current forecast data.
 4. Stores all of the data on device, persistent across launches.
 
-# Libraries + Concepts
+### Libraries + Concepts
 * *Architectural Patterns* - Model-View-ViewModel, Repository, Dependency Injection.
 * *Android GeoCoder API* - For reverse geocoding the zip code.
 * *Architecture Compnents* - LiveData, Room, ViewModel.
