@@ -7,6 +7,7 @@ This is a demo app built for teaching concepts.  It shows the weather for variou
 2. It reverse geocodes the lat/long and location name from the zip code.
 3. Uses the [darksky.net](https://darksky.net) weather API to fetch current forecast data.
 4. Stores all of the data on device, persistent across launches.
+5. Weather forecast data is cached, but refreshed by the repository on launch.
 
 ### Libraries + Concepts
 * *Architectural Patterns* - Model-View-ViewModel, Repository, Dependency Injection.
