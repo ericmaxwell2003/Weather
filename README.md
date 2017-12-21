@@ -3,7 +3,6 @@ This is a demo app built for teaching concepts.  It shows the weather for variou
 
 ### Usage
 
-The way it works is you:
 1. Add a zip code.
 2. It reverse geocodes the lat/long and location name from the zip code.
 3. Uses the [darksky.net](https://darksky.net) weather API to fetch current forecast data.
