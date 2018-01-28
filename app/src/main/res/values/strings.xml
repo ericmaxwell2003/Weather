@@ -7,7 +7,11 @@
     <string name="low_temp">Low: %1$d</string>
     <string name="fahrenheit">F</string>
     <string name="celsius">C</string>
-    <string name="adding_location_progress_message">Adding Location...</string>
+    <string name="adding_location_progress_message">Adding Location…</string>
     <string name="unit_toggle_label">F / C</string>
+    <string name="zip_code">ZIP Code</string>
+    <string name="location_add_title">Add Location</string>
+    <string name="location_add_button_label">Add</string>
+    <string name="location_cancel_button_label">Cancel</string>
 
 </resources>

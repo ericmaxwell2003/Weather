@@ -1,8 +1,12 @@
 package com.acme.weather.view
 
+import android.app.Activity
+import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -22,6 +26,7 @@ import org.jetbrains.anko.appcompat.v7.Appcompat
 import org.jetbrains.anko.customView
 import org.jetbrains.anko.editText
 import org.jetbrains.anko.verticalLayout
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -33,6 +38,9 @@ class WeatherListFragment : Fragment(), Injectable {
     private lateinit var binding: WeatherListFragmentBinding
     private lateinit var weatherRecyclerAdapter: WeatherRecyclerAdapter
     private lateinit var weatherListViewModel: WeatherListViewModel
+
+    val REQUEST_LOCATION = 0
+    val DIALOG_LOCATION = "DialogLocation"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -129,24 +137,26 @@ class WeatherListFragment : Fragment(), Injectable {
 
     fun showZipDialog() {
         hideProgressDialog()
-        context?.apply {
-            alert {
-                Appcompat
-                customView {
-                    verticalLayout {
-                        val zip = editText {
-                            hint = "ZIP Code"
-                            inputType = android.text.InputType.TYPE_CLASS_NUMBER
-                        }
-                        positiveButton("Add") {
-                            weatherListViewModel.onLocationEntered(zip.text.toString())
-                        }
-                        negativeButton("Cancel") {
-                            timber.log.Timber.d("Location add cancelled")
-                        }
-                    }
+        val fm = fragmentManager
+        fm?.let { fragmentMgr ->
+            val locationDialog = LocationDialogFragment()
+            locationDialog.setTargetFragment(this, REQUEST_LOCATION)
+            locationDialog.show(fragmentMgr, DIALOG_LOCATION)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if(requestCode == REQUEST_LOCATION) {
+
+            when(resultCode) {
+                RESULT_OK -> data?.getStringExtra(LocationDialogFragment.EXTRA_LOCATION)?.let { zip ->
+                    weatherListViewModel.onLocationEntered(zip)
                 }
-            }.show()
+                RESULT_CANCELED -> Timber.i("User cancelled add location")
+                else -> Timber.e("Unknown resquestCode [${requestCode}]")
+            }
+
         }
     }
 
