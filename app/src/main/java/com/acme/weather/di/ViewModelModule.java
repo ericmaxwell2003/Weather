@@ -1,9 +1,8 @@
 package com.acme.weather.di;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
-import com.acme.weather.view.WeatherDetailFragment;
 import com.acme.weather.viewmodel.WeatherDetailViewModel;
 import com.acme.weather.viewmodel.WeatherListViewModel;
 import com.acme.weather.viewmodel.WeatherViewModelFactory;

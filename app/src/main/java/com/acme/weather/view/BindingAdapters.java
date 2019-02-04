@@ -1,11 +1,12 @@
 package com.acme.weather.view;
 
 
-import android.databinding.BindingAdapter;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.databinding.BindingAdapter;
 
 public class BindingAdapters {
 

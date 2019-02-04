@@ -1,18 +1,16 @@
 package com.acme.weather.view
 
-import android.app.Activity
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
 import android.view.*
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.acme.weather.R
 import com.acme.weather.WeatherApplication
 import com.acme.weather.databinding.WeatherListFragmentBinding
@@ -21,11 +19,7 @@ import com.acme.weather.viewmodel.DEFAULT
 import com.acme.weather.viewmodel.LOCATION_ADD_FAILED
 import com.acme.weather.viewmodel.LOCATION_ADD_PENDING
 import com.acme.weather.viewmodel.WeatherListViewModel
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.appcompat.v7.Appcompat
-import org.jetbrains.anko.customView
-import org.jetbrains.anko.editText
-import org.jetbrains.anko.verticalLayout
+import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import javax.inject.Inject
 

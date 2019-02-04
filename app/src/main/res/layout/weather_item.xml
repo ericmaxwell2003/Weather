@@ -9,7 +9,7 @@
         <variable name="vm" type="com.acme.weather.viewmodel.WeatherItemViewModel" />
     </data>
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/weather_item"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -105,6 +105,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

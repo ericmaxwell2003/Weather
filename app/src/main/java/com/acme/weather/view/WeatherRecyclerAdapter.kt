@@ -1,9 +1,9 @@
 package com.acme.weather.view
 
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.acme.weather.R
 import com.acme.weather.databinding.WeatherItemBinding
 import com.acme.weather.model.api.Weather

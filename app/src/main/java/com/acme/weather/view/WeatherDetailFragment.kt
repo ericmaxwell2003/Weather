@@ -1,20 +1,21 @@
 package com.acme.weather.view
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.acme.weather.R
 import com.acme.weather.WeatherApplication
 import com.acme.weather.databinding.WeatherDetailFragmentBinding
 import com.acme.weather.di.Injectable
 import com.acme.weather.viewmodel.WeatherDetailViewModel
+import com.acme.weather.viewmodel.WeatherItemViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -59,7 +60,7 @@ class WeatherDetailFragment : Fragment(), Injectable {
             viewModel.setWeatherId(weatherId, shouldShowFahrenheit)
         }
 
-        viewModel.weatherViewModel?.observe(this, Observer { weather ->
+        viewModel.weatherViewModel?.observe(this, Observer { weather: WeatherItemViewModel? ->
             if(weather != null) {
                 binding.vm = weather
             }

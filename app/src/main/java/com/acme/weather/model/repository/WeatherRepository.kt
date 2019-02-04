@@ -1,21 +1,15 @@
 package com.acme.weather.model.repository
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.acme.weather.model.api.*
-import com.acme.weather.model.repository.database.WeatherDatabase
 import com.acme.weather.model.repository.database.dao.WeatherDao
 import com.acme.weather.model.repository.database.entity.TemperatureEntity
 import com.acme.weather.model.repository.database.entity.WeatherEntity
-import com.acme.weather.model.repository.network.WeatherApi
-import com.acme.weather.model.repository.network.WeatherApiResponse
 import com.acme.weather.model.repository.network.WeatherForecastService
-import io.reactivex.Completable
-import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.doAsync
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.math.roundToInt
 
 @Singleton
 class WeatherRepository @Inject constructor(
@@ -66,9 +60,9 @@ class WeatherRepository @Inject constructor(
     }
 
     private fun fetchWeatherFromDatabase() : LiveData<List<Weather>> {
-        return Transformations.map(weatherDao.findAll(), { weatherObjects ->
+        return Transformations.map(weatherDao.findAll()) { weatherObjects: List<WeatherEntity> ->
             weatherObjects.map { entityToDto(it) }
-        })
+        }
     }
 
     private fun entityToDto(it: WeatherEntity) : Weather {

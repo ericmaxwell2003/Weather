@@ -1,8 +1,8 @@
 package com.acme.weather.model.repository.database
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.platform.app.InstrumentationRegistry
 import com.acme.weather.model.repository.database.dao.WeatherDao
 import com.acme.weather.model.repository.database.entity.TemperatureEntity
 import com.acme.weather.model.repository.database.entity.WeatherEntity
@@ -15,7 +15,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 class WeatherEntityCrudTest {
 
     private lateinit var weatherDao: WeatherDao
@@ -26,7 +26,7 @@ class WeatherEntityCrudTest {
 
     @Before
     fun createDb() {
-        val context = InstrumentationRegistry.getTargetContext()
+        val context = InstrumentationRegistry.getInstrumentation().targetContext
         db = WeatherDatabase.create(context, true)
         weatherDao = db.weatherDao()
     }

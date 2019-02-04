@@ -1,7 +1,7 @@
 package com.acme.weather.viewmodel
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.acme.weather.model.repository.WeatherRepository
 import com.acme.weather.model.repository.geolocation.WeatherLocationService
 import org.jetbrains.anko.doAsync

@@ -1,9 +1,8 @@
 package com.acme.weather.model.repository.database.dao
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.*
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import com.acme.weather.model.repository.database.entity.WeatherEntity
-import io.reactivex.Flowable
 
 
 @Dao
