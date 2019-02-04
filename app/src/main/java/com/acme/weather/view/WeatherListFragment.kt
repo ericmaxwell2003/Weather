@@ -10,11 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.acme.weather.R
 import com.acme.weather.WeatherApplication
 import com.acme.weather.databinding.WeatherListFragmentBinding
 import com.acme.weather.di.Injectable
+import com.acme.weather.view.WeatherListFragmentDirections.actionWeatherListFragmentToWeatherDetailFragment
 import com.acme.weather.viewmodel.DEFAULT
 import com.acme.weather.viewmodel.LOCATION_ADD_FAILED
 import com.acme.weather.viewmodel.LOCATION_ADD_PENDING
@@ -59,7 +61,7 @@ class WeatherListFragment : Fragment(), Injectable {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        binding = DataBindingUtil.inflate<WeatherListFragmentBinding>(
+        binding = DataBindingUtil.inflate(
                 LayoutInflater.from(context),
                 R.layout.weather_list_fragment, container, false)
 
@@ -125,8 +127,19 @@ class WeatherListFragment : Fragment(), Injectable {
     }
 
     fun showDetail(id: Long) {
-        (activity as MainActivity).show(id,
-                weatherListViewModel.shouldPreferFahrenheit.value ?: true)
+
+        val directions =
+                actionWeatherListFragmentToWeatherDetailFragment(id)
+                        .setUseFahrenheitKey(true)
+
+        findNavController(this).navigate(directions)
+
+//        al direction = PlantListFragmentDirections.actionPlantListFragmentToPlantDetailFragment(plantId)
+//        it.findNavController().navigate(direction)
+
+//        findNavController().navigate(R.id.action_weatherListFragment_to_weatherDetailFragment)
+//        (activity as MainActivity).show(id,
+//                weatherListViewModel.shouldPreferFahrenheit.value ?: true)
     }
 
     fun showZipDialog() {

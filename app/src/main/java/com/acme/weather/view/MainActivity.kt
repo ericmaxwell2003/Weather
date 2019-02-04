@@ -17,25 +17,27 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (savedInstanceState == null) {
-            val fragment = WeatherListFragment()
-
-            supportFragmentManager.beginTransaction()
-                    .add(R.id.fragment_container, fragment, "recipeList").commit()
-        }
+//        if (savedInstanceState == null) {
+//
+//            val fragment = WeatherListFragment()
+//
+//            supportFragmentManager.beginTransaction()
+//                    .add(R.id.fragment_container, fragment, "recipeList").commit()
+//
+//        }
     }
 
-    fun show(weatherId: Long, displayAsFahrenheit: Boolean) {
-
-        val weatherFragment = WeatherDetailFragment
-                .forWeatherSummary(weatherId, displayAsFahrenheit)
-
-        supportFragmentManager
-                .beginTransaction()
-                .addToBackStack("weatherList")
-                .replace(R.id.fragment_container,
-                        weatherFragment, null).commit()
-    }
+//    fun show(weatherId: Long, displayAsFahrenheit: Boolean) {
+//
+//        val weatherFragment = WeatherDetailFragment
+//                .forWeatherSummary(weatherId, displayAsFahrenheit)
+//
+//        supportFragmentManager
+//                .beginTransaction()
+//                .addToBackStack("weatherList")
+//                .replace(R.id.fragment_container,
+//                        weatherFragment, null).commit()
+//    }
 
     override fun supportFragmentInjector(): DispatchingAndroidInjector<Fragment> {
         return dispatchingAndroidInjector

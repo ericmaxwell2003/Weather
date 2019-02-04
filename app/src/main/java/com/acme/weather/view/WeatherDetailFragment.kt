@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import com.acme.weather.R
 import com.acme.weather.WeatherApplication
 import com.acme.weather.databinding.WeatherDetailFragmentBinding
@@ -25,6 +26,8 @@ class WeatherDetailFragment : Fragment(), Injectable {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var binding: WeatherDetailFragmentBinding
+
+    val args: WeatherDetailFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -49,14 +52,14 @@ class WeatherDetailFragment : Fragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val weatherId = arguments?.getLong(WEATHER_ITEM_ID_KEY)
-        val shouldShowFahrenheit = arguments?.getBoolean(USE_FAHRENHEIT_KEY) ?: true
+        val weatherId = args.weatherItemIdKey
+        val shouldShowFahrenheit = args.useFahrenheitKey
 
         val viewModel = ViewModelProviders
                 .of(this, viewModelFactory)
                 .get(WeatherDetailViewModel::class.java)
 
-        if(weatherId != null && viewModel.weatherViewModel == null) {
+        if(viewModel.weatherViewModel == null) {
             viewModel.setWeatherId(weatherId, shouldShowFahrenheit)
         }
 

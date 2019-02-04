@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/weather_nav"
+    app:startDestination="@id/weatherListFragment">
+
+    <fragment
+        android:id="@+id/weatherListFragment"
+        android:name="com.acme.weather.view.WeatherListFragment"
+        android:label="WeatherListFragment"
+        tools:layout="@layout/weather_list_fragment"
+        >
+        <action
+            android:id="@+id/action_weatherListFragment_to_weatherDetailFragment"
+            app:destination="@id/weatherDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/weatherListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weatherDetailFragment"
+        android:name="com.acme.weather.view.WeatherDetailFragment"
+        android:label="WeatherDetailFragment"
+        tools:layout="@layout/weather_detail_fragment"
+        >
+        <argument
+            android:name="weather_item_id_key"
+            app:argType="long" />
+        <argument
+            android:name="use_fahrenheit_key"
+            app:argType="boolean"
+            android:defaultValue="true" />
+    </fragment>
+</navigation>
