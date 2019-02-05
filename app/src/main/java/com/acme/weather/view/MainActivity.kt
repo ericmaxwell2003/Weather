@@ -3,6 +3,11 @@ package com.acme.weather.view
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.acme.weather.R
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -13,34 +18,23 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        if (savedInstanceState == null) {
-//
-//            val fragment = WeatherListFragment()
-//
-//            supportFragmentManager.beginTransaction()
-//                    .add(R.id.fragment_container, fragment, "recipeList").commit()
-//
-//        }
+        navController = findNavController(R.id.weather_nav_fragment)
+        NavigationUI.setupActionBarWithNavController(this, navController)
     }
 
-//    fun show(weatherId: Long, displayAsFahrenheit: Boolean) {
-//
-//        val weatherFragment = WeatherDetailFragment
-//                .forWeatherSummary(weatherId, displayAsFahrenheit)
-//
-//        supportFragmentManager
-//                .beginTransaction()
-//                .addToBackStack("weatherList")
-//                .replace(R.id.fragment_container,
-//                        weatherFragment, null).commit()
-//    }
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
 
     override fun supportFragmentInjector(): DispatchingAndroidInjector<Fragment> {
         return dispatchingAndroidInjector
     }
+
 }
 
