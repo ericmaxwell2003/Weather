@@ -134,12 +134,6 @@ class WeatherListFragment : Fragment(), Injectable {
 
         findNavController(this).navigate(directions)
 
-//        al direction = PlantListFragmentDirections.actionPlantListFragmentToPlantDetailFragment(plantId)
-//        it.findNavController().navigate(direction)
-
-//        findNavController().navigate(R.id.action_weatherListFragment_to_weatherDetailFragment)
-//        (activity as MainActivity).show(id,
-//                weatherListViewModel.shouldPreferFahrenheit.value ?: true)
     }
 
     fun showZipDialog() {

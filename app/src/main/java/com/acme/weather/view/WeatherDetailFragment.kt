@@ -71,21 +71,6 @@ class WeatherDetailFragment : Fragment(), Injectable {
 
     }
 
-    companion object {
-
-        private val WEATHER_ITEM_ID_KEY = "weather_id"
-        private val USE_FAHRENHEIT_KEY = "should_use_fahrenheit"
-
-        fun forWeatherSummary(weatherId: Long, displayAsFahrenheit: Boolean): WeatherDetailFragment {
-            val fragment = WeatherDetailFragment()
-            val args = Bundle()
-            args.putLong(WEATHER_ITEM_ID_KEY, weatherId)
-            args.putBoolean(USE_FAHRENHEIT_KEY, displayAsFahrenheit)
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         (activity?.application as? WeatherApplication)?.refWatcher?.watch(this)
