@@ -16,7 +16,6 @@ import com.acme.weather.R
 import com.acme.weather.WeatherApplication
 import com.acme.weather.databinding.WeatherListFragmentBinding
 import com.acme.weather.di.Injectable
-import com.acme.weather.view.WeatherListFragmentDirections.actionWeatherListFragmentToWeatherDetailFragment
 import com.acme.weather.viewmodel.DEFAULT
 import com.acme.weather.viewmodel.LOCATION_ADD_FAILED
 import com.acme.weather.viewmodel.LOCATION_ADD_PENDING
@@ -128,8 +127,7 @@ class WeatherListFragment : Fragment(), Injectable {
 
     fun showDetail(id: Long) {
 
-        val directions =
-                actionWeatherListFragmentToWeatherDetailFragment(id)
+        val directions = WeatherListFragmentDirections.navigateToWeatherDetails(id)
                         .setUseFahrenheitKey(true)
 
         findNavController(this).navigate(directions)

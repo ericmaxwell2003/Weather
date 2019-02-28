@@ -1,110 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!-- Layout needs cleaned up a bit, but has the basic components -->
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
         <variable name="vm" type="com.acme.weather.viewmodel.WeatherItemViewModel" />
     </data>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/weather_item"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="8dp"
-            app:weatherBackground="@{vm.bgColor}"
-            tools:background="@color/bg_snowy">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/weather_item"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="8dp"
+        app:weatherBackground="@{vm.bgColor}"
+        tools:background="@color/bg_snowy">
 
-            <TextView
-                android:id="@+id/currentTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="84dp"
-                android:layout_marginStart="8dp"
-                android:text="@{vm.currentTemp.toString()}"
-                android:textSize="64sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="86" />
+        <TextView
+            android:id="@+id/currentTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="84dp"
+            android:layout_marginStart="8dp"
+            android:text="@{vm.currentTemp.toString()}"
+            android:textSize="64sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="86" />
 
-            <TextView
-                android:id="@+id/locationName"
-                android:layout_width="wrap_content"
-                android:layout_height="18dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="@{vm.location}"
-                tools:text="Bellflower"
-                android:textSize="12sp"
-                android:ellipsize="end"
-                android:lines="1"
-                app:layout_constraintTop_toBottomOf="@id/currentTemp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/currentTemp"
-                />
+        <TextView
+            android:id="@+id/locationName"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@{vm.location}"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/currentTemp"
+            app:layout_constraintTop_toBottomOf="@id/currentTemp"
+            tools:text="Bellflower" />
 
-            <TextView
-                android:id="@+id/scaleType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@id/currentTemp"
-                app:layout_constraintStart_toEndOf="@id/currentTemp"
-                app:layout_constraintTop_toTopOf="@id/currentTemp"
-                app:layout_constraintVertical_bias="0.32"
-                android:text="@{vm.showFahrenheit ? @string/fahrenheit : @string/celsius}"
-                tools:text="F" />
+        <TextView
+            android:id="@+id/scaleType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{vm.showFahrenheit ? @string/fahrenheit : @string/celsius}"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/currentTemp"
+            app:layout_constraintStart_toEndOf="@id/currentTemp"
+            app:layout_constraintTop_toTopOf="@id/currentTemp"
+            app:layout_constraintVertical_bias="0.32"
+            tools:text="F" />
 
-            <TextView
-                android:id="@+id/todayHighTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@id/todayLowTemp"
-                app:layout_constraintEnd_toStartOf="@+id/weather_icon"
-                app:layout_constraintStart_toEndOf="@id/scaleType"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.62"
-                app:layout_constraintVertical_chainStyle="packed"
-                android:text= "@{@string/high_temp(vm.highTemp)}"
-                tools:text="High: 96" />
+        <TextView
+            android:id="@+id/todayHighTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@{@string/high_temp(vm.highTemp)}"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/todayLowTemp"
+            app:layout_constraintEnd_toStartOf="@+id/weather_icon"
+            app:layout_constraintStart_toEndOf="@id/scaleType"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.62"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="High: 96" />
 
-            <TextView
-                android:id="@+id/todayLowTemp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@+id/weather_icon"
-                app:layout_constraintStart_toEndOf="@id/scaleType"
-                app:layout_constraintTop_toBottomOf="@+id/todayHighTemp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:text="Low: 22"
-                android:text="@{@string/low_temp(vm.lowTemp)}"
-                />
+        <TextView
+            android:id="@+id/todayLowTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@{@string/low_temp(vm.lowTemp)}"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/weather_icon"
+            app:layout_constraintStart_toEndOf="@id/scaleType"
+            app:layout_constraintTop_toBottomOf="@+id/todayHighTemp"
+            tools:text="Low: 22" />
 
-            <ImageView
-                android:id="@+id/weather_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="16dp"
-                android:contentDescription="@{vm.weatherIconContentDesc}"
-                android:scaleType="center"
-                app:weatherIcon='@{vm.weatherIcon}'
-                tools:src="@mipmap/ic_snowy"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/weather_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:contentDescription="@{vm.weatherIconContentDesc}"
+            android:scaleType="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:weatherIcon='@{vm.weatherIcon}'
+            tools:src="@mipmap/ic_snowy" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

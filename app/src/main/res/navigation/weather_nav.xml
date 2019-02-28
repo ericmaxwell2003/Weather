@@ -3,24 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/weather_nav"
-    app:startDestination="@id/weatherListFragment">
+    app:startDestination="@id/weatherList">
 
     <fragment
-        android:id="@+id/weatherListFragment"
+        android:id="@+id/weatherList"
         android:name="com.acme.weather.view.WeatherListFragment"
         android:label="Weather Now"
-        tools:layout="@layout/weather_list_fragment"
-        >
+        tools:layout="@layout/weather_list_fragment">
         <action
-            android:id="@+id/action_weatherListFragment_to_weatherDetailFragment"
-            app:destination="@id/weatherDetailFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            android:id="@+id/navigate_to_weather_details"
+            app:destination="@id/weatherDetail" />
     </fragment>
     <fragment
-        android:id="@+id/weatherDetailFragment"
+        android:id="@+id/weatherDetail"
         android:name="com.acme.weather.view.WeatherDetailFragment"
         android:label="Today's Forecast"
         tools:layout="@layout/weather_detail_fragment"

@@ -10,4 +10,5 @@
     <color name="bg_cloudy">#C6D7EE</color>
     <color name="bg_partlycloudy">#D2E0F1</color>
     <color name="bg_sunny">#BBDAFF</color>
+    <color name="card_view_white">#FFFFFFFF</color>
 </resources>
