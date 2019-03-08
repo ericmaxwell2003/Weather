@@ -1,8 +1,5 @@
 package com.acme.weather.view
 
-import android.app.Activity.RESULT_CANCELED
-import android.app.Activity.RESULT_OK
-import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
@@ -10,22 +7,22 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.acme.weather.R
 import com.acme.weather.WeatherApplication
 import com.acme.weather.databinding.WeatherListFragmentBinding
 import com.acme.weather.di.Injectable
+import com.acme.weather.navigation.NavigationResult
 import com.acme.weather.viewmodel.DEFAULT
 import com.acme.weather.viewmodel.LOCATION_ADD_FAILED
 import com.acme.weather.viewmodel.LOCATION_ADD_PENDING
 import com.acme.weather.viewmodel.WeatherListViewModel
 import com.google.android.material.snackbar.Snackbar
-import timber.log.Timber
 import javax.inject.Inject
 
 
-class WeatherListFragment : Fragment(), Injectable {
+class WeatherListFragment : Fragment(), Injectable, NavigationResult {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -68,8 +65,8 @@ class WeatherListFragment : Fragment(), Injectable {
 
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         weatherListViewModel = ViewModelProviders
                 .of(this, viewModelFactory)
@@ -129,35 +126,48 @@ class WeatherListFragment : Fragment(), Injectable {
 
         val directions = WeatherListFragmentDirections.navigateToWeatherDetails(id)
                         .setUseFahrenheitKey(true)
-
-        findNavController(this).navigate(directions)
+        findNavController().navigate(directions)
 
     }
 
     fun showZipDialog() {
         hideProgressDialog()
-        val fm = fragmentManager
-        fm?.let { fragmentMgr ->
-            val locationDialog = LocationDialogFragment()
-            locationDialog.setTargetFragment(this, REQUEST_LOCATION)
-            locationDialog.show(fragmentMgr, DIALOG_LOCATION)
+
+        val directions = WeatherListFragmentDirections.navigateToAddLocationDialog()
+        findNavController().navigate(directions)
+    }
+
+//    fun showZipDialog() {
+//        hideProgressDialog()
+//        val fm = fragmentManager
+//        fm?.let { fragmentMgr ->
+//            val locationDialog = LocationDialogFragment()
+//            locationDialog.setTargetFragment(this, REQUEST_LOCATION)
+//            locationDialog.show(fragmentMgr, DIALOG_LOCATION)
+//        }
+//    }
+
+
+    override fun onNavigationResult(result: Bundle) {
+        result.getString(LocationDialogFragment.EXTRA_LOCATION)?.let { zip ->
+            weatherListViewModel.onLocationEntered(zip)
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        if(requestCode == REQUEST_LOCATION) {
-
-            when(resultCode) {
-                RESULT_OK -> data?.getStringExtra(LocationDialogFragment.EXTRA_LOCATION)?.let { zip ->
-                    weatherListViewModel.onLocationEntered(zip)
-                }
-                RESULT_CANCELED -> Timber.i("User cancelled add location")
-                else -> Timber.e("Unknown resquestCode [${requestCode}]")
-            }
-
-        }
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//
+//        if(requestCode == REQUEST_LOCATION) {
+//
+//            when(resultCode) {
+//                RESULT_OK -> data?.getStringExtra(LocationDialogFragment.EXTRA_LOCATION)?.let { zip ->
+//                    weatherListViewModel.onLocationEntered(zip)
+//                }
+//                RESULT_CANCELED -> Timber.i("User cancelled add location")
+//                else -> Timber.e("Unknown resquestCode [${requestCode}]")
+//            }
+//
+//        }
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

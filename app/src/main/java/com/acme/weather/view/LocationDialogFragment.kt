@@ -33,9 +33,11 @@ class LocationDialogFragment : DialogFragment() {
     }
 
     fun sendResult(resultCode: Int, zipCode: String) {
-        val intent = Intent()
-        intent.putExtra(EXTRA_LOCATION, zipCode)
-        targetFragment?.onActivityResult(targetRequestCode, resultCode, intent)
+//        val intent = Intent()
+//        intent.putExtra(EXTRA_LOCATION, zipCode)
+//        targetFragment?.onActivityResult(targetRequestCode, resultCode, intent)
+        (requireActivity() as MainActivity).navigateBackWithResult(Bundle().apply { putString(EXTRA_LOCATION, zipCode) })
+
     }
 
     companion object {

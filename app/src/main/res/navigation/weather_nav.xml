@@ -10,9 +10,14 @@
         android:name="com.acme.weather.view.WeatherListFragment"
         android:label="Weather Now"
         tools:layout="@layout/weather_list_fragment">
+
+        <action android:id="@+id/navigate_to_add_location_dialog"
+            app:destination="@id/locationDialog" />
+
         <action
             android:id="@+id/navigate_to_weather_details"
             app:destination="@id/weatherDetail" />
+
     </fragment>
     <fragment
         android:id="@+id/weatherDetail"
@@ -21,11 +26,18 @@
         tools:layout="@layout/weather_detail_fragment"
         >
         <argument
+            android:id="@+id/weather_item_id_key"
             android:name="weather_item_id_key"
             app:argType="long" />
         <argument
+            android:id="@+id/use_fahrenheit_key"
             android:name="use_fahrenheit_key"
             app:argType="boolean"
             android:defaultValue="true" />
     </fragment>
+    <dialog
+        android:id="@+id/locationDialog"
+        android:name="com.acme.weather.view.LocationDialogFragment"
+        tools:layout="@layout/location_add_dialog"
+        android:label="Enter Zip Code" />
 </navigation>
