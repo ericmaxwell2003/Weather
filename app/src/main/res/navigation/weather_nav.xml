@@ -11,8 +11,10 @@
         android:label="Weather Now"
         tools:layout="@layout/weather_list_fragment">
 
-        <action android:id="@+id/navigate_to_add_location_dialog"
-            app:destination="@id/locationDialog" />
+        <action
+            android:id="@+id/navigate_to_add_location_dialog"
+            app:destination="@id/locationDialog"
+            app:popUpTo="@+id/weatherList" />
 
         <action
             android:id="@+id/navigate_to_weather_details"
