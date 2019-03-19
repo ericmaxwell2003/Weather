@@ -22,4 +22,10 @@ class WeatherDetailViewModel @Inject constructor(
         }
     }
 
+    fun setZipCode(zipCode: String, shouldShowFahrenheit: Boolean) {
+        weatherViewModel = Transformations.map(weatherRepository.byZipCode(zipCode)) {
+            WeatherItemViewModel(weather = it, showFahrenheit = shouldShowFahrenheit)
+        }
+    }
+
 }

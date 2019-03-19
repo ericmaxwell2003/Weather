@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/weather_nav"
+    app:startDestination="@id/weather_list">
+
+    <include android:id="@+id/login_graph" app:graph="@navigation/login_graph" />
+
+    <action
+        android:id="@+id/action_global_login"
+        app:destination="@id/login_graph" />
+
+    <fragment
+        android:id="@+id/weather_list"
+        android:name="com.acme.weather.app.view.WeatherListFragment"
+        android:label="Weather Now"
+        tools:layout="@layout/weather_list_fragment">
+
+        <action
+            android:id="@+id/navigate_to_weather_details"
+            app:destination="@id/weather_detail" >
+
+            <argument android:defaultValue="true"
+                android:name="use_fahrenheit" />
+
+        </action>
+
+    </fragment>
+    <fragment
+        android:id="@+id/weather_detail"
+        android:name="com.acme.weather.app.view.WeatherDetailFragment"
+        android:label="Today's Forecast"
+        tools:layout="@layout/weather_detail_fragment">
+
+        <argument
+            android:name="zip_code"
+            app:argType="string" />
+
+        <argument
+            android:name="use_fahrenheit"
+            app:argType="boolean" />
+
+    </fragment>
+
+</navigation>

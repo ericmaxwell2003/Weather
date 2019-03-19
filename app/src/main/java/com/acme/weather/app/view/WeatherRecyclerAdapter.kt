@@ -10,7 +10,7 @@ import com.acme.weather.model.api.Weather
 import com.acme.weather.viewmodel.WeatherItemViewModel
 
 class WeatherRecyclerAdapter(
-        private val onItemClick: (id: Long) -> Unit,
+        private val onItemClick: (zipCode: String) -> Unit,
         private val onItemLongClick: (id: Long) -> Unit)
     : RecyclerView.Adapter<WeatherRecyclerAdapter.RecipeViewHolder>() {
 
@@ -40,9 +40,7 @@ class WeatherRecyclerAdapter(
         val weatherItemVm = WeatherItemViewModel(weatherList[position], showFahrenheit)
         holder.binding.weatherItem.apply {
             setOnClickListener {
-                if(weatherItem.id != null) {
-                    onItemClick(weatherItem.id)
-                }
+                onItemClick(weatherItem.location.zip)
             }
             setOnLongClickListener {
                 if(weatherItem.id != null) {

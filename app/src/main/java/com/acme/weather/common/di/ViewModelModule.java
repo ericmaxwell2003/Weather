@@ -3,9 +3,9 @@ package com.acme.weather.di;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.acme.weather.viewmodel.WeatherDetailViewModel;
-import com.acme.weather.viewmodel.WeatherListViewModel;
-import com.acme.weather.viewmodel.WeatherViewModelFactory;
+import com.acme.weather.app.viewmodel.WeatherDetailViewModel;
+import com.acme.weather.app.viewmodel.WeatherListViewModel;
+import com.acme.weather.app.viewmodel.WeatherViewModelFactory;
 
 import dagger.Binds;
 import dagger.Module;

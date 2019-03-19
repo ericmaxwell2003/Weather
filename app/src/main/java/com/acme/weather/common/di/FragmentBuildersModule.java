@@ -16,13 +16,18 @@
 
 package com.acme.weather.di;
 
-import com.acme.weather.view.MainActivity;
+import com.acme.weather.app.view.WeatherDetailFragment;
+import com.acme.weather.app.view.WeatherListFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
 @Module
-abstract class MainActivityModule {
-    @ContributesAndroidInjector(modules = FragmentBuildersModule.class)
-    abstract MainActivity contributeMainActivity();
+public abstract class FragmentBuildersModule {
+
+    @ContributesAndroidInjector
+    abstract WeatherListFragment weatherListFragment();
+
+    @ContributesAndroidInjector
+    abstract WeatherDetailFragment weatherDetailFragment();
 }

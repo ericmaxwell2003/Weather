@@ -2,11 +2,11 @@ package com.acme.weather.di
 
 import android.app.Application
 import android.location.Geocoder
-import com.acme.weather.model.repository.WeatherRepository
-import com.acme.weather.model.repository.database.WeatherDatabase
-import com.acme.weather.model.repository.database.dao.WeatherDao
-import com.acme.weather.model.repository.geolocation.WeatherLocationService
-import com.acme.weather.model.repository.network.WeatherForecastService
+import com.acme.weather.app.model.repository.WeatherRepository
+import com.acme.weather.app.model.repository.database.WeatherDatabase
+import com.acme.weather.app.model.repository.database.dao.WeatherDao
+import com.acme.weather.app.model.repository.geolocation.WeatherLocationService
+import com.acme.weather.app.model.repository.network.WeatherForecastService
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

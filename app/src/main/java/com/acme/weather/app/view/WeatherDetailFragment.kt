@@ -52,15 +52,15 @@ class WeatherDetailFragment : Fragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val weatherId = args.weatherItemIdKey
-        val shouldShowFahrenheit = args.useFahrenheitKey
+        val zipCode = args.zipCode
+        val shouldShowFahrenheit = args.useFahrenheit
 
         val viewModel = ViewModelProviders
                 .of(this, viewModelFactory)
                 .get(WeatherDetailViewModel::class.java)
 
         if(viewModel.weatherViewModel == null) {
-            viewModel.setWeatherId(weatherId, shouldShowFahrenheit)
+            viewModel.setZipCode(zipCode, shouldShowFahrenheit)
         }
 
         viewModel.weatherViewModel?.observe(this, Observer { weather: WeatherItemViewModel? ->

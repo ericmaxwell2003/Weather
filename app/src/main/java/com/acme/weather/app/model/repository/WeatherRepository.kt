@@ -26,6 +26,12 @@ class WeatherRepository @Inject constructor(
         })
     }
 
+    fun byZipCode(zipCode: String) : LiveData<Weather> {
+        return Transformations.map(weatherDao.byZip(zipCode), {
+            entityToDto(it)
+        })
+    }
+
     fun removeWeatherLocation(id: Long) {
         doAsync {
             weatherDao.delete(weatherDao.byIdSync(id))

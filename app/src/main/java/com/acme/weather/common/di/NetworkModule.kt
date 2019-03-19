@@ -1,8 +1,8 @@
 package com.acme.weather.di
 
 import android.app.Application
-import com.acme.weather.model.repository.network.WeatherApi
-import com.acme.weather.model.repository.network.WeatherForecastService
+import com.acme.weather.app.model.repository.network.WeatherApi
+import com.acme.weather.app.model.repository.network.WeatherForecastService
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides

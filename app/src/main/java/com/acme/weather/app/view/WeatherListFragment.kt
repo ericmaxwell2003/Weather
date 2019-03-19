@@ -2,6 +2,7 @@ package com.acme.weather.view
 
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -37,13 +38,19 @@ class WeatherListFragment : Fragment(), Injectable {
     val REQUEST_LOCATION = 0
     val DIALOG_LOCATION = "DialogLocation"
 
+    override fun onAttach(context: Context) {
+        Timber.d("onAttach")
+        super.onAttach(context)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        Timber.d("onCreate")
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, menuInflater: MenuInflater?) {
-        menuInflater?.inflate(R.menu.weather_menu, menu)
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.weather_menu, menu)
         super.onCreateOptionsMenu(menu, menuInflater)
     }
 
@@ -76,7 +83,7 @@ class WeatherListFragment : Fragment(), Injectable {
                 .get(WeatherListViewModel::class.java)
 
         weatherRecyclerAdapter = WeatherRecyclerAdapter(
-                   onItemClick = { id -> showDetail(id) },
+                   onItemClick = { zip -> showDetail(zip) },
                    onItemLongClick = { id -> weatherListViewModel.onLocationDeleted(id) })
 
         val recyclerView = binding.weatherListRecyclerView
@@ -125,10 +132,12 @@ class WeatherListFragment : Fragment(), Injectable {
         }
     }
 
-    fun showDetail(id: Long) {
+    fun showDetail(zipCode: String) {
 
-        val directions = WeatherListFragmentDirections.navigateToWeatherDetails(id)
-                        .setUseFahrenheitKey(true)
+        val directions =
+                WeatherListFragmentDirections.navigateToWeatherDetails(zipCode)
+                        .setUseFahrenheit(true)
+
         findNavController().navigate(directions)
 
     }
