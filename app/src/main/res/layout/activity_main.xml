@@ -7,10 +7,10 @@
 
     <fragment
         android:id="@+id/weather_nav_fragment"
-        android:name="com.acme.weather.navigation.DialogNavHostFragment"
+        android:name="com.acme.weather.common.navigation.DialogNavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/weather_nav"/>
+        app:navGraph="@navigation/weather_graph"/>
 
 </FrameLayout>

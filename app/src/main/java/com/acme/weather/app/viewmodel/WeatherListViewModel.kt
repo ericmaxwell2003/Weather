@@ -1,9 +1,9 @@
-package com.acme.weather.viewmodel
+package com.acme.weather.app.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.acme.weather.model.repository.WeatherRepository
-import com.acme.weather.model.repository.geolocation.WeatherLocationService
+import com.acme.weather.app.model.repository.WeatherRepository
+import com.acme.weather.app.model.repository.geolocation.WeatherLocationService
 import org.jetbrains.anko.doAsync
 import timber.log.Timber
 import javax.inject.Inject

@@ -1,11 +1,11 @@
-package com.acme.weather.model.repository.database
+package com.acme.weather.app.model.repository.database
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
-import com.acme.weather.model.repository.database.dao.WeatherDao
-import com.acme.weather.model.repository.database.entity.TemperatureEntity
-import com.acme.weather.model.repository.database.entity.WeatherEntity
+import com.acme.weather.app.model.repository.database.dao.WeatherDao
+import com.acme.weather.app.model.repository.database.entity.TemperatureEntity
+import com.acme.weather.app.model.repository.database.entity.WeatherEntity
 import org.hamcrest.Matchers.equalTo
 import org.junit.After
 import org.junit.Assert.assertThat

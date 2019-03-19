@@ -1,7 +1,7 @@
 package com.acme.weather
 
 import android.app.Activity
-import com.acme.weather.di.AppInjector
+import com.acme.weather.common.di.AppInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import timber.log.Timber

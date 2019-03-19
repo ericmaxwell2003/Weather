@@ -1,11 +1,11 @@
-package com.acme.weather.model.repository.database
+package com.acme.weather.app.model.repository.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.acme.weather.model.repository.database.dao.WeatherDao
-import com.acme.weather.model.repository.database.entity.WeatherEntity
+import com.acme.weather.app.model.repository.database.dao.WeatherDao
+import com.acme.weather.app.model.repository.database.entity.WeatherEntity
 
 
 @Database(entities = arrayOf(WeatherEntity::class), version = 1)

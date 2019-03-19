@@ -1,4 +1,4 @@
-package com.acme.weather.view
+package com.acme.weather.app.view
 
 import android.app.Activity
 import android.app.Dialog
@@ -40,7 +40,7 @@ class LocationDialogFragment : DialogFragment() {
     }
 
     companion object {
-        val EXTRA_LOCATION = "com.acme.weather.view.EXTRA_LOCATION"
+        val EXTRA_LOCATION = "com.acme.weather.app.view.EXTRA_LOCATION"
     }
 }
 

@@ -1,4 +1,4 @@
-package com.acme.weather.di;
+package com.acme.weather.common.di;
 
 import androidx.lifecycle.ViewModel;
 

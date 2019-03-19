@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.acme.weather.di;
+package com.acme.weather.common.di;
 
 import com.acme.weather.app.view.WeatherDetailFragment;
 import com.acme.weather.app.view.WeatherListFragment;

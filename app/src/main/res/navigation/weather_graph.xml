@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/weather_nav"
+    android:id="@+id/weather_graph"
     app:startDestination="@id/weather_list">
 
     <include android:id="@+id/login_graph" app:graph="@navigation/login_graph" />

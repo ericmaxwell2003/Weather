@@ -1,4 +1,4 @@
-package com.acme.weather.model.api
+package com.acme.weather.app.model.api
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

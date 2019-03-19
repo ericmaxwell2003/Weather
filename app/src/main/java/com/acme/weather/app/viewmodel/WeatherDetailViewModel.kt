@@ -1,9 +1,9 @@
-package com.acme.weather.viewmodel
+package com.acme.weather.app.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.acme.weather.model.repository.WeatherRepository
+import com.acme.weather.app.model.repository.WeatherRepository
 import javax.inject.Inject
 
 class WeatherDetailViewModel @Inject constructor(

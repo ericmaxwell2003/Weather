@@ -1,7 +1,7 @@
-package com.acme.weather.model.repository.geolocation
+package com.acme.weather.app.model.repository.geolocation
 
 import android.location.Geocoder
-import com.acme.weather.model.api.Location
+import com.acme.weather.app.model.api.Location
 import javax.inject.Inject
 
 class WeatherLocationService @Inject constructor(val geoCoder: Geocoder) {

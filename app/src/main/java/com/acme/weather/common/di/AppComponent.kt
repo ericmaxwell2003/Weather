@@ -1,4 +1,4 @@
-package com.acme.weather.di
+package com.acme.weather.common.di
 
 import android.app.Application
 import com.acme.weather.WeatherApplication

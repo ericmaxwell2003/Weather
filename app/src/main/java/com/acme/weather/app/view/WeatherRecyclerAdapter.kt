@@ -1,4 +1,4 @@
-package com.acme.weather.view
+package com.acme.weather.app.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,8 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.acme.weather.R
 import com.acme.weather.databinding.WeatherItemBinding
-import com.acme.weather.model.api.Weather
-import com.acme.weather.viewmodel.WeatherItemViewModel
+import com.acme.weather.app.model.api.Weather
+import com.acme.weather.app.viewmodel.WeatherItemViewModel
 
 class WeatherRecyclerAdapter(
         private val onItemClick: (zipCode: String) -> Unit,

@@ -1,4 +1,4 @@
-package com.acme.weather.viewmodel;
+package com.acme.weather.app.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;

@@ -1,4 +1,4 @@
-package com.acme.weather.model.repository.database.entity
+package com.acme.weather.app.model.repository.database.entity
 
 import androidx.room.Embedded
 import androidx.room.Entity

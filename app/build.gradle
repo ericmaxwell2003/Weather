@@ -42,11 +42,17 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.room:room-runtime:2.0.0'
     implementation 'androidx.room:room-rxjava2:2.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
     kapt 'androidx.room:room-compiler:2.0.0'
     annotationProcessor 'androidx.room:room-compiler:2.0.0'
-    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-rc02"
-    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-rc02"
+    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
+    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
+
+
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
+    implementation 'androidx.fragment:fragment-ktx:1.1.0-alpha05'
+
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

@@ -1,4 +1,4 @@
-package com.acme.weather.navigation
+package com.acme.weather.common.navigation
 
 import android.os.Bundle
 

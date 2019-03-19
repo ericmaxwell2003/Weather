@@ -1,6 +1,6 @@
-package com.acme.weather.viewmodel
+package com.acme.weather.app.viewmodel
 
-import com.acme.weather.model.api.Weather
+import com.acme.weather.app.model.api.Weather
 
 /**
  * Simplified Value Model object to display weatherList.

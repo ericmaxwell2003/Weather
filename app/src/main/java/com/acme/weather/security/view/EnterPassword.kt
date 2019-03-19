@@ -1,22 +1,23 @@
-package com.acme.weather.app.view.login
+package com.acme.weather.security.view
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.acme.weather.R
-import com.acme.weather.security.model.AuthenticationViewModel
-import com.acme.weather.security.model.CredentialsViewModel
+import com.acme.weather.security.model.AuthenticationObject
+import com.acme.weather.security.viewmodel.CredentialsViewModel
 
-class EnterPassword() : Fragment() {
+class EnterPassword : Fragment() {
 
     val credentialsViewModel by activityViewModels<CredentialsViewModel>()
-    val authenticationViewModel by activityViewModels<AuthenticationViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?) =
@@ -27,12 +28,16 @@ class EnterPassword() : Fragment() {
 
         view.findViewById<Button>(R.id.next_button).setOnClickListener {
             val username = credentialsViewModel.username
-            val password = view.findViewById<EditText>(R.id.username_edit_text).text.toString()
+            val password = view.findViewById<EditText>(R.id.password_edit_text).text.toString()
+            AuthenticationObject.authenticate(username, password)
 
-            authenticationViewModel.authenticate(username, password) {
-//                findNavController().popBackStack()
-            }
         }
+
+        AuthenticationObject.isAuthenticated.observe(viewLifecycleOwner, Observer { isAuthenticated ->
+            if(isAuthenticated) {
+                findNavController().navigate(EnterPasswordDirections.actionLoginPop())
+            }
+        })
 
     }
 }

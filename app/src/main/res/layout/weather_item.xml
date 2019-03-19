@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="vm" type="com.acme.weather.viewmodel.WeatherItemViewModel" />
+        <variable name="vm" type="com.acme.weather.app.viewmodel.WeatherItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

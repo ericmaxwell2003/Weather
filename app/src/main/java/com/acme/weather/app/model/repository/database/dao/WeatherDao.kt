@@ -1,8 +1,8 @@
-package com.acme.weather.model.repository.database.dao
+package com.acme.weather.app.model.repository.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.acme.weather.model.repository.database.entity.WeatherEntity
+import com.acme.weather.app.model.repository.database.entity.WeatherEntity
 
 
 @Dao

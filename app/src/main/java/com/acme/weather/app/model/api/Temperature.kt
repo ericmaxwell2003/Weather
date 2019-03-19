@@ -1,4 +1,4 @@
-package com.acme.weather.model.api
+package com.acme.weather.app.model.api
 
 import kotlin.math.roundToInt
 

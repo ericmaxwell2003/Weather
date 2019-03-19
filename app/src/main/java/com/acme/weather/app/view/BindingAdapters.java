@@ -1,4 +1,4 @@
-package com.acme.weather.view;
+package com.acme.weather.app.view;
 
 
 import android.os.Bundle;

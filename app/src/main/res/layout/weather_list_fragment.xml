@@ -5,7 +5,7 @@
 
     <data>
         <import type="android.view.View"/>
-        <variable name="vm" type="com.acme.weather.viewmodel.WeatherListViewModel"/>
+        <variable name="vm" type="com.acme.weather.app.viewmodel.WeatherListViewModel"/>
     </data>
 
     <FrameLayout

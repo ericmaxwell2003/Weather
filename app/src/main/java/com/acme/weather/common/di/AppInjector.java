@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.acme.weather.di;
+package com.acme.weather.common.di;
 
 import android.app.Activity;
 import android.app.Application;

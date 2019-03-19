@@ -1,4 +1,4 @@
-package com.acme.weather.model.repository.network
+package com.acme.weather.app.model.repository.network
 
 data class WeatherApiResponse(
         var latitude: String?,

@@ -1,12 +1,12 @@
-package com.acme.weather.model.repository
+package com.acme.weather.app.model.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.acme.weather.model.api.*
-import com.acme.weather.model.repository.database.dao.WeatherDao
-import com.acme.weather.model.repository.database.entity.TemperatureEntity
-import com.acme.weather.model.repository.database.entity.WeatherEntity
-import com.acme.weather.model.repository.network.WeatherForecastService
+import com.acme.weather.app.model.api.*
+import com.acme.weather.app.model.repository.database.dao.WeatherDao
+import com.acme.weather.app.model.repository.database.entity.TemperatureEntity
+import com.acme.weather.app.model.repository.database.entity.WeatherEntity
+import com.acme.weather.app.model.repository.network.WeatherForecastService
 import org.jetbrains.anko.doAsync
 import javax.inject.Inject
 import javax.inject.Singleton

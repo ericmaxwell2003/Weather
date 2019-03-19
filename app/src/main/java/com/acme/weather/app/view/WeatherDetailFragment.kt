@@ -1,4 +1,4 @@
-package com.acme.weather.view
+package com.acme.weather.app.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,13 +14,14 @@ import androidx.navigation.fragment.navArgs
 import com.acme.weather.R
 import com.acme.weather.WeatherApplication
 import com.acme.weather.databinding.WeatherDetailFragmentBinding
-import com.acme.weather.di.Injectable
-import com.acme.weather.viewmodel.WeatherDetailViewModel
-import com.acme.weather.viewmodel.WeatherItemViewModel
+import com.acme.weather.common.di.Injectable
+import com.acme.weather.app.viewmodel.WeatherDetailViewModel
+import com.acme.weather.app.viewmodel.WeatherItemViewModel
+import com.acme.weather.security.view.SecureFragment
 import timber.log.Timber
 import javax.inject.Inject
 
-class WeatherDetailFragment : Fragment(), Injectable {
+class WeatherDetailFragment : SecureFragment(), Injectable {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -49,8 +50,9 @@ class WeatherDetailFragment : Fragment(), Injectable {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        super.onViewCreated(view, savedInstanceState)
 
         val zipCode = args.zipCode
         val shouldShowFahrenheit = args.useFahrenheit

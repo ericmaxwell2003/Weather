@@ -1,8 +1,8 @@
-package com.acme.weather.model.repository.network
+package com.acme.weather.app.model.repository.network
 
-import com.acme.weather.model.api.ForecastData
-import com.acme.weather.model.api.Temperature
-import com.acme.weather.model.api.WeatherIcon
+import com.acme.weather.app.model.api.ForecastData
+import com.acme.weather.app.model.api.Temperature
+import com.acme.weather.app.model.api.WeatherIcon
 import javax.inject.Inject
 import kotlin.math.roundToInt
 

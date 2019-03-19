@@ -1,4 +1,4 @@
-package com.acme.weather.model.repository.network
+package com.acme.weather.app.model.repository.network
 
 import io.reactivex.Single
 import retrofit2.http.GET

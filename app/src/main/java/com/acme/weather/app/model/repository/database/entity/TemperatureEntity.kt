@@ -1,4 +1,4 @@
-package com.acme.weather.model.repository.database.entity
+package com.acme.weather.app.model.repository.database.entity
 
 class TemperatureEntity {
     var fahrenheit: Int = 0

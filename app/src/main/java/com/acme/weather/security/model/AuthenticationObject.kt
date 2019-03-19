@@ -1,14 +1,19 @@
 package com.acme.weather.security.model
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class AuthenticationViewModel() : ViewModel() {
+object AuthenticationObject : ViewModel() {
 
-    var isAuthenticated = false
+    val isAuthenticated = MutableLiveData<Boolean>()
 
-    fun authenticate(username: String, password: String, onAuthenticated: (() -> Unit)) {
-        isAuthenticated = true
-        onAuthenticated()
+    init {
+        isAuthenticated.value = false
+    }
+
+    fun authenticate(username: String, password: String) {
+        // disregard credentials, just set auth status to true
+        isAuthenticated.value = true
     }
 
 }

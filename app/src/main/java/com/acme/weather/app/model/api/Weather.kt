@@ -1,4 +1,4 @@
-package com.acme.weather.model.api
+package com.acme.weather.app.model.api
 
 data class Weather(
         val id: Long?,
