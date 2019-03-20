@@ -40,7 +40,12 @@
 
         <argument
             android:name="use_fahrenheit"
-            app:argType="boolean" />
+            app:argType="boolean"
+            android:defaultValue="true" />
+
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="weather.acme.com/{zip_code}" />
 
     </fragment>
 

@@ -16,6 +16,9 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name=".app.view.MainActivity">
+
+            <nav-graph android:value="@navigation/weather_graph" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
