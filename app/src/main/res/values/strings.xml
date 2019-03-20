@@ -23,5 +23,6 @@
     <string name="login_button_label">Login</string>
     <string name="password_screen_label">Password</string>
     <string name="user_name_label">User Name</string>
+    <string name="logout">Logout</string>
 
 </resources>

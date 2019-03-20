@@ -78,6 +78,7 @@ class WeatherListFragment : SecureFragment(), Injectable {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
 
         weatherListViewModel = ViewModelProviders

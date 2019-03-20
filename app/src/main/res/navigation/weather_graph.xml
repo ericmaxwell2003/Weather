@@ -9,7 +9,8 @@
 
     <action
         android:id="@+id/action_global_login"
-        app:destination="@id/login_graph" />
+        app:destination="@id/login_graph"
+        app:launchSingleTop="true" />
 
     <fragment
         android:id="@+id/weather_list"

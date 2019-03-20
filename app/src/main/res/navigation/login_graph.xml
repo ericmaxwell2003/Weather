@@ -3,26 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_graph"
-    app:startDestination="@id/enter_username">
+    app:startDestination="@id/enter_credentials">
 
     <fragment
-        android:id="@+id/enter_username"
-        android:name="com.acme.weather.security.view.EnterUsername"
-        android:label="Enter Username"
-        tools:layout="@layout/fragment_enter_username">
-        <action
-            android:id="@+id/navigate_to_enter_password"
-            app:destination="@id/enter_password" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/enter_password"
-        android:name="com.acme.weather.security.view.EnterPassword"
+        android:id="@+id/enter_credentials"
+        android:name="com.acme.weather.security.view.EnterCredentials"
         android:label="Enter Password"
-        tools:layout="@layout/fragment_enter_password">
+        tools:layout="@layout/enter_credentials">
         <action
             android:id="@+id/action_login_pop"
-            app:popUpTo="@id/enter_username"
+            app:popUpTo="@id/enter_credentials"
             app:popUpToInclusive="true" />
     </fragment>
 
