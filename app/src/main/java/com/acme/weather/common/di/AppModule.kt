@@ -1,6 +1,8 @@
 package com.acme.weather.common.di
 
 import android.app.Application
+import android.app.NotificationManager
+import android.content.Context
 import android.location.Geocoder
 import com.acme.weather.app.model.repository.WeatherRepository
 import com.acme.weather.app.model.repository.database.WeatherDatabase
@@ -42,6 +44,12 @@ class AppModule {
     @Provides
     fun geoCoder(context: Application) : Geocoder {
         return Geocoder(context)
+    }
+
+    @Singleton
+    @Provides
+    fun notificationManager(context: Application) : NotificationManager {
+        return context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
 
 }

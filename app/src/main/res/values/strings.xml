@@ -24,5 +24,6 @@
     <string name="password_screen_label">Password</string>
     <string name="user_name_label">User Name</string>
     <string name="logout">Logout</string>
+    <string name="sim_deeplink">Sim Deeplink</string>
 
 </resources>
