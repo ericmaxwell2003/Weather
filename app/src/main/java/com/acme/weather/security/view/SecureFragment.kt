@@ -5,10 +5,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.acme.weather.WeatherGraphDirections
-import com.acme.weather.common.navigation.isStartDestination
 import com.acme.weather.security.viewmodel.AuthenticationViewModel
 import com.acme.weather.security.viewmodel.AuthenticationViewModel.AuthenticationStatus.UNAUTHENTICATED
 import com.acme.weather.security.viewmodel.AuthenticationViewModel.AuthenticationStatus.USER_DECLINED
@@ -35,10 +33,9 @@ abstract class SecureFragment : Fragment() {
     }
 
     private fun popBackStackOrExit() {
-        if (navController.isStartDestination(navController.currentDestination)) {
+        if(!navController.popBackStack()) {
+            requireActivity().setVisible(false)
             requireActivity().finish()
-        } else {
-            navController.popBackStack()
         }
     }
 }
