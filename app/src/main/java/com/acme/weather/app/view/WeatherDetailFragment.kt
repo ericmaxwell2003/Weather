@@ -110,6 +110,7 @@ class WeatherDetailFragment : SecureFragment(), Injectable {
 
     fun scheduleNotificationForCity() {
 
+
         // If I weren't already here....
         val pendingIntent = navController.createDeepLink()
                 .setGraph(R.navigation.weather_graph)

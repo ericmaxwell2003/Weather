@@ -20,10 +20,15 @@
 
         <action
             android:id="@+id/navigate_to_weather_details"
-            app:destination="@id/weather_detail" >
+            app:destination="@id/weather_detail"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
 
-            <argument android:defaultValue="true"
-                android:name="use_fahrenheit" />
+            <argument
+                android:name="use_fahrenheit"
+                android:defaultValue="true" />
 
         </action>
 
