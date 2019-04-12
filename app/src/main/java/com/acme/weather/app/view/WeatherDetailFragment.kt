@@ -120,7 +120,7 @@ class WeatherDetailFragment : SecureFragment(), Injectable {
         createNotificationChannel()
 
         val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
-                .setSmallIcon(R.drawable.leak_canary_icon)
+                .setSmallIcon(android.R.drawable.ic_menu_compass)
                 .setContentTitle("Weather Report")
                 .setContentText("Weather now in ${args.zipCode}")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)

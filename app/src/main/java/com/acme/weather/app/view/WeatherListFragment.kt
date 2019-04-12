@@ -7,21 +7,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.acme.weather.R
-import com.acme.weather.WeatherApplication
-import com.acme.weather.databinding.WeatherListFragmentBinding
-import com.acme.weather.common.di.Injectable
 import com.acme.weather.app.view.WeatherListFragmentDirections.navigateToWeatherDetails
 import com.acme.weather.app.viewmodel.DEFAULT
 import com.acme.weather.app.viewmodel.LOCATION_ADD_FAILED
 import com.acme.weather.app.viewmodel.LOCATION_ADD_PENDING
 import com.acme.weather.app.viewmodel.WeatherListViewModel
+import com.acme.weather.common.di.Injectable
+import com.acme.weather.databinding.WeatherListFragmentBinding
 import com.acme.weather.security.view.SecureFragment
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
@@ -182,11 +180,6 @@ class WeatherListFragment : SecureFragment(), Injectable {
             }
 
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        (activity?.application as? WeatherApplication)?.refWatcher?.watch(this)
     }
 
 }
