@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -51,11 +52,12 @@ class EnterCredentials : Fragment() {
         })
 
 
-        requireActivity().addOnBackPressedCallback(viewLifecycleOwner, OnBackPressedCallback {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             authenticationViewModel.declineAuthentication()
-            true
-        })
+        }
     }
+
+
 }
 
 

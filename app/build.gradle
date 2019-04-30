@@ -51,15 +51,14 @@ dependencies {
 
 
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0'
-    implementation 'androidx.fragment:fragment-ktx:1.1.0-alpha06'
+    implementation 'androidx.fragment:fragment-ktx:1.1.0-alpha07'
 
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
     implementation "org.jetbrains.anko:anko:0.10.3"
-
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
